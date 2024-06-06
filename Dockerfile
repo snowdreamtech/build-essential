@@ -4,7 +4,7 @@ LABEL maintainer="snowdream <sn0wdr1am@qq.com>"
 
 ENV SSH_ROOT_PASSWORD=
 
-RUN apk add --no-cache fastfetch openssh \ 
+RUN apk add --no-cache fastfetch openssh openssl-dev zlib-dev alpine-sdk git subversion mercurial \ 
 && sed -i "s/#PermitRootLogin.*/PermitRootLogin yes/g" /etc/ssh/sshd_config \ 
 && sed -i "s/^#PasswordAuthentication/PasswordAuthentication/g" /etc/ssh/sshd_config \ 
 && sed -i "s/^#PermitEmptyPasswords/PermitEmptyPasswords/g" /etc/ssh/sshd_config \ 

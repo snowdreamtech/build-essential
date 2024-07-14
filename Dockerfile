@@ -1,4 +1,4 @@
-FROM snowdreamtech/openssh:9.7_p1-r3
+FROM snowdreamtech/openssh:9.7
 
 LABEL maintainer="snowdream <sn0wdr1am@qq.com>"
 

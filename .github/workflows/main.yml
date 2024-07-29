@@ -66,10 +66,10 @@ jobs:
             push: true
             tags: |
               snowdreamtech/build-essential:latest
-              snowdreamtech/build-essential:3.20.0
+              snowdreamtech/build-essential:3.20.2
               snowdreamtech/build-essential:3.20
               snowdreamtech/build-essential:3
               ghcr.io/snowdreamtech/build-essential:latest
-              ghcr.io/snowdreamtech/build-essential:3.20.0
+              ghcr.io/snowdreamtech/build-essential:3.20.2
               ghcr.io/snowdreamtech/build-essential:3.20
               ghcr.io/snowdreamtech/build-essential:3

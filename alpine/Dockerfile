@@ -18,8 +18,24 @@ ENV KEEPALIVE=1
 RUN apk add --no-cache \
     linux-headers \
     alpine-sdk \
+    pkgconf \
     openssl-dev \
+    gnutls-dev \
+    libgcrypt-dev \
+    nettle-dev \
+    gmp-dev \
+    libssh2-dev \ 
+    c-ares-dev \
+    libxml2-dev \
     zlib-dev \
+    sqlite-dev \ 
+    libgpg-error-dev \
+    expat-dev \ 
+    cppunit-dev \
+    autoconf \
+    automake \ 
+    gettext \
+    libtool \
     git \
     subversion \
     mercurial \

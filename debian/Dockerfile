@@ -32,7 +32,6 @@ RUN set -eux \
     zlib1g-dev \
     libsqlite3-dev \
     libgpg-error-dev \
-    libgcrypt20-dev \ 
     libexpat1-dev \ 
     libcppunit-dev \
     autoconf \

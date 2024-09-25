@@ -20,8 +20,26 @@ RUN set -eux \
     && apt-get -qqy update  \
     && apt-get -qqy install --no-install-recommends \ 
     build-essential \
+    pkg-config \ 
     libssl-dev \
+    libgnutls28-dev \
+    libgcrypt20-dev \
+    nettle-dev \
+    libgmp-dev \
+    libssh2-1-dev \
+    libc-ares-dev \
+    libxml2-dev \
     zlib1g-dev \
+    libsqlite3-dev \
+    libgpg-error-dev \
+    libgcrypt20-dev \ 
+    libexpat1-dev \ 
+    libcppunit-dev \
+    autoconf \
+    automake \ 
+    autotools-dev \ 
+    autopoint \
+    libtool \
     git \
     subversion \
     mercurial \

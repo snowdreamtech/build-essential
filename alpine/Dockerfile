@@ -20,22 +20,34 @@ RUN apk add --no-cache \
     alpine-sdk \
     pkgconf \
     openssl-dev \
+    openssl-libs-static \
     gnutls-dev \
     libgcrypt-dev \
+    libgcrypt-static \
     nettle-dev \
+    nettle-static \
     gmp-dev \
     libssh2-dev \ 
+    libssh2-static \
     c-ares-dev \
+    c-ares-static \
     zstd-dev \
+    zstd-static \
     libxml2-dev \
+    libxml2-static \
     zlib-dev \
+    zlib-static \
     sqlite-dev \ 
+    sqlite-static \
     libgpg-error-dev \
+    libgpg-error-static \
     expat-dev \ 
+    expat-static \
     cppunit-dev \
     autoconf \
     automake \ 
     gettext-dev \
+    gettext-static \
     libtool \
     git \
     subversion \

@@ -3,7 +3,7 @@ name: Github Cache Cleanup
 on:
   schedule:
     # Automatically run on every Day
-    - cron: "0 17 * * 0"
+    - cron: "0 16 * * 0"
   workflow_dispatch:
 
 jobs:

@@ -12,20 +12,25 @@ on:
   workflow_dispatch:
 
 jobs:
-  clear-caches:
+  cleanup:
     runs-on: ubuntu-latest
     steps:
-      - name: List all caches
-        id: list-caches
+      - name: Cleanup
         run: |
-          gh api --method GET /repos/${{ github.repository }}/actions/caches > caches.json
-          cat caches.json
-        env:
-          GH_TOKEN: ${{ github.token }}
-      - name: Delete all caches
-        run: |
-          for cache_id in $(jq -r '.actions_caches[].id' caches.json); do
-            gh api --method DELETE /repos/${{ github.repository }}/actions/caches/$cache_id
+          gh extension install actions/gh-actions-cache
+
+          echo "Fetching list of cache key"
+          cacheKeys=$(gh actions-cache list -R $REPO -B $BRANCH -L 100 | cut -f 1 )
+
+          ## Setting this to not fail the workflow while deleting cache keys.
+          set +e
+          echo "Deleting caches..."
+          for cacheKey in $cacheKeys
+          do
+              gh actions-cache delete $cacheKey -R $REPO -B $BRANCH --confirm
           done
+          echo "Done"
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          BRANCH: ${{ github.ref }}

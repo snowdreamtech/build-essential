@@ -35,7 +35,7 @@ RUN apk add --no-cache \
     cppunit-dev \
     autoconf \
     automake \ 
-    gettext \
+    gettext-dev \
     libtool \
     git \
     subversion \

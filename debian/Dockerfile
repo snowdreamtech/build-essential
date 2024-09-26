@@ -28,6 +28,7 @@ RUN set -eux \
     libgmp-dev \
     libssh2-1-dev \
     libc-ares-dev \
+    libzstd-dev \
     libxml2-dev \
     zlib1g-dev \
     libsqlite3-dev \

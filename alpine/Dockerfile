@@ -26,6 +26,7 @@ RUN apk add --no-cache \
     gmp-dev \
     libssh2-dev \ 
     c-ares-dev \
+    zstd-dev \
     libxml2-dev \
     zlib-dev \
     sqlite-dev \ 

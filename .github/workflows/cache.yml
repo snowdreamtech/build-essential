@@ -20,9 +20,12 @@ jobs:
         run: |
           gh api --method GET /repos/${{ github.repository }}/actions/caches > caches.json
           cat caches.json
-
+        env:
+          GH_TOKEN: ${{ github.token }}
       - name: Delete all caches
         run: |
           for cache_id in $(jq -r '.actions_caches[].id' caches.json); do
             gh api --method DELETE /repos/${{ github.repository }}/actions/caches/$cache_id
           done
+        env:
+          GH_TOKEN: ${{ github.token }}

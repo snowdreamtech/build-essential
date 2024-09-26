@@ -44,6 +44,8 @@ RUN set -eux \
     subversion \
     mercurial \
     xz-utils \
+    && LIBS_PATH=$(find /usr/lib -name "libcares_static.a" -exec dirname {} \;) \
+    && ln -s ${LIBS_PATH}/libcares_static.a ${LIBS_PATH}/libcares.a \
     && apt-get -qqy --purge autoremove \
     && apt-get -qqy clean \
     && rm -rf /var/lib/apt/lists/* \

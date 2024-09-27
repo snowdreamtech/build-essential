@@ -49,9 +49,6 @@ RUN apk add --no-cache \
     expat-dev \ 
     expat-static \
     cppunit-dev \
-    git \
-    subversion \
-    mercurial \
     xz
 
 COPY docker-entrypoint.sh /usr/local/bin/

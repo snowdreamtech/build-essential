@@ -40,9 +40,6 @@ RUN set -eux \
     libgpg-error-dev \
     libexpat1-dev \ 
     libcppunit-dev \
-    # git \
-    # subversion \
-    # mercurial \
     xz-utils \
     && LIBS_PATH=$(find /usr/lib -name "libcares_static.a" -exec dirname {} \;) \
     && ln -s ${LIBS_PATH}/libcares_static.a ${LIBS_PATH}/libcares.a \

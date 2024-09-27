@@ -26,26 +26,26 @@ RUN set -eux \
     autotools-dev \ 
     autopoint \
     libtool \
-    # libssl-dev \
+    libssl-dev \
     # libgnutls28-dev \
     # libgcrypt20-dev \
     # nettle-dev \
     # libgmp-dev \
-    # libssh2-1-dev \
-    # libc-ares-dev \
-    # libzstd-dev \
-    # libxml2-dev \
-    # zlib1g-dev \
-    # libsqlite3-dev \
-    # libgpg-error-dev \
-    # libexpat1-dev \ 
-    # libcppunit-dev \
+    libssh2-1-dev \
+    libc-ares-dev \
+    libzstd-dev \
+    libxml2-dev \
+    zlib1g-dev \
+    libsqlite3-dev \
+    libgpg-error-dev \
+    libexpat1-dev \ 
+    libcppunit-dev \
     # git \
     # subversion \
     # mercurial \
-    # xz-utils \
-    # && LIBS_PATH=$(find /usr/lib -name "libcares_static.a" -exec dirname {} \;) \
-    # && ln -s ${LIBS_PATH}/libcares_static.a ${LIBS_PATH}/libcares.a \
+    xz-utils \
+    && LIBS_PATH=$(find /usr/lib -name "libcares_static.a" -exec dirname {} \;) \
+    && ln -s ${LIBS_PATH}/libcares_static.a ${LIBS_PATH}/libcares.a \
     && apt-get -qqy --purge autoremove \
     && apt-get -qqy clean \
     && rm -rf /var/lib/apt/lists/* \

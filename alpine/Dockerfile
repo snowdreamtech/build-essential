@@ -19,6 +19,11 @@ RUN apk add --no-cache \
     linux-headers \
     alpine-sdk \
     pkgconf \
+    autoconf \
+    automake \ 
+    gettext-dev \
+    gettext-static \
+    libtool \
     openssl-dev \
     openssl-libs-static \
     gnutls-dev \
@@ -44,11 +49,6 @@ RUN apk add --no-cache \
     expat-dev \ 
     expat-static \
     cppunit-dev \
-    autoconf \
-    automake \ 
-    gettext-dev \
-    gettext-static \
-    libtool \
     git \
     subversion \
     mercurial \

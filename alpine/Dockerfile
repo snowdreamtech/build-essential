@@ -26,11 +26,8 @@ RUN apk add --no-cache \
     libtool \
     openssl-dev \
     openssl-libs-static \
-    gnutls-dev \
     libgcrypt-dev \
     libgcrypt-static \
-    nettle-dev \
-    nettle-static \
     gmp-dev \
     libssh2-dev \ 
     libssh2-static \

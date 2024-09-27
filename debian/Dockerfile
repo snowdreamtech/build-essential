@@ -27,10 +27,8 @@ RUN set -eux \
     autopoint \
     libtool \
     libssl-dev \
-    # libgnutls28-dev \
-    # libgcrypt20-dev \
-    # nettle-dev \
-    # libgmp-dev \
+    libgcrypt20-dev \
+    libgmp-dev \
     libssh2-1-dev \
     libc-ares-dev \
     libzstd-dev \

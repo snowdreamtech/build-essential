@@ -19,7 +19,8 @@ RUN set -eux \
     && sed -i "s|Types:\s*deb.*|Types: deb deb-src|g" /etc/apt/sources.list.d/debian.sources \
     && apt-get -qqy update  \
     && apt-get -qqy install \ 
-    build-essential \
+    build-essential \ 
+    cmake \ 
     && apt-get -qqy --purge autoremove \
     && apt-get -qqy clean \
     && rm -rf /var/lib/apt/lists/* \

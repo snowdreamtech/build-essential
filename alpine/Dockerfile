@@ -16,7 +16,8 @@ LABEL org.opencontainers.image.authors="Snowdream Tech" \
 ENV KEEPALIVE=1
 
 RUN apk add --no-cache \
-    alpine-sdk    
+    alpine-sdk \ 
+    cmake   
 
 COPY docker-entrypoint.sh /usr/local/bin/
 

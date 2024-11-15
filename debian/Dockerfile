@@ -20,6 +20,7 @@ RUN set -eux \
     && apt-get -qqy update  \
     && apt-get -qqy install --no-install-recommends \ 
     build-essential \
+    cmake \
     pkg-config \ 
     autoconf \
     automake \ 

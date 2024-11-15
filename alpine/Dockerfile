@@ -20,6 +20,7 @@ RUN apk add --no-cache \
     alpine-sdk \
     clang18 \
     clang18-dev \
+    cmake \
     pkgconf \
     autoconf \
     automake \ 

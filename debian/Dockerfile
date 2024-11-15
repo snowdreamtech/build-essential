@@ -18,7 +18,7 @@ ENV KEEPALIVE=1
 RUN set -eux \
     && sed -i "s|Types:\s*deb.*|Types: deb deb-src|g" /etc/apt/sources.list.d/debian.sources \
     && apt-get -qqy update  \
-    && apt-get -qqy install --no-install-recommends \ 
+    && apt-get -qqy install \ 
     build-essential \
     cmake \
     pkg-config \ 
@@ -50,7 +50,7 @@ RUN set -eux \
 
 RUN set -eux \
     && apt-get -qqy update  \
-    && apt-get -qqy install --no-install-recommends \ 
+    && apt-get -qqy install \ 
     -t trixie \
     clang-19 \
     libclang-19-dev \

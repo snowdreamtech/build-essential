@@ -27,14 +27,15 @@ RUN set -eux \
     && rm -rf /var/tmp/*
 
 RUN set -eux \
-    && wget -c https://github.com/Kitware/CMake/releases/download/${CMAKE_VERSION}/cmake-${CMAKE_VERSION}.tar.gz \
+    && wget -c https://github.com/Kitware/CMake/archive/refs/tags/v${CMAKE_VERSION}.tar.gz -O cmake-${CMAKE_VERSION}.tar.gz \
     && tar -zxvf cmake-${CMAKE_VERSION}.tar.gz \
-    && cd cmake-${CMAKE_VERSION} \
+    && cd CMake-${CMAKE_VERSION} \
     && ./bootstrap \
     && make \
     && make install \
+    && cd .. \
     && rm -rfv cmake-${CMAKE_VERSION}.tar.gz \
-    && rm -rfv cmake-${CMAKE_VERSION}
+    && rm -rfv CMake-${CMAKE_VERSION}
 
 COPY docker-entrypoint.sh /usr/local/bin/
 

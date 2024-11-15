@@ -16,40 +16,7 @@ LABEL org.opencontainers.image.authors="Snowdream Tech" \
 ENV KEEPALIVE=1
 
 RUN apk add --no-cache \
-    linux-headers \
-    alpine-sdk \
-    clang18 \
-    clang18-dev \
-    cmake \
-    pkgconf \
-    autoconf \
-    automake \ 
-    gettext-dev \
-    gettext-static \
-    libtool \
-    openssl-dev \
-    openssl-libs-static \
-    libgcrypt-dev \
-    libgcrypt-static \
-    gmp-dev \
-    libssh2-dev \ 
-    libssh2-static \
-    c-ares-dev \
-    c-ares-static \
-    zstd-dev \
-    zstd-static \
-    libxml2-dev \
-    libxml2-static \
-    zlib-dev \
-    zlib-static \
-    sqlite-dev \ 
-    sqlite-static \
-    libgpg-error-dev \
-    libgpg-error-static \
-    expat-dev \ 
-    expat-static \
-    cppunit-dev \
-    xz
+    alpine-sdk    
 
 COPY docker-entrypoint.sh /usr/local/bin/
 

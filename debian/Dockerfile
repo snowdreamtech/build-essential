@@ -20,40 +20,6 @@ RUN set -eux \
     && apt-get -qqy update  \
     && apt-get -qqy install \ 
     build-essential \
-    cmake \
-    pkg-config \ 
-    autoconf \
-    automake \ 
-    autotools-dev \ 
-    autopoint \
-    libtool \
-    libssl-dev \
-    libgcrypt20-dev \
-    libgmp-dev \
-    libssh2-1-dev \
-    libc-ares-dev \
-    libzstd-dev \
-    libxml2-dev \
-    zlib1g-dev \
-    libsqlite3-dev \
-    libgpg-error-dev \
-    libexpat1-dev \ 
-    libcppunit-dev \
-    xz-utils \
-    && LIBS_PATH=$(find /usr/lib -name "libcares_static.a" -exec dirname {} \;) \
-    && ln -s ${LIBS_PATH}/libcares_static.a ${LIBS_PATH}/libcares.a \
-    && apt-get -qqy --purge autoremove \
-    && apt-get -qqy clean \
-    && rm -rf /var/lib/apt/lists/* \
-    && rm -rf /tmp/* \
-    && rm -rf /var/tmp/*
-
-RUN set -eux \
-    && apt-get -qqy update  \
-    && apt-get -qqy install \ 
-    -t trixie \
-    clang-19 \
-    libclang-19-dev \
     && apt-get -qqy --purge autoremove \
     && apt-get -qqy clean \
     && rm -rf /var/lib/apt/lists/* \

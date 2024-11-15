@@ -13,19 +13,28 @@ LABEL org.opencontainers.image.authors="Snowdream Tech" \
     org.opencontainers.image.url="https://github.com/snowdreamtech/base"
 
 # keep the docker container running
-ENV KEEPALIVE=1
+ENV CMAKE_VERSION=3.31.0
 
 RUN set -eux \
     && sed -i "s|Types:\s*deb.*|Types: deb deb-src|g" /etc/apt/sources.list.d/debian.sources \
     && apt-get -qqy update  \
     && apt-get -qqy install \ 
     build-essential \ 
-    cmake \ 
     && apt-get -qqy --purge autoremove \
     && apt-get -qqy clean \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /tmp/* \
     && rm -rf /var/tmp/*
+
+RUN set -eux \
+    && wget -c https://github.com/Kitware/CMake/releases/download/${CMAKE_VERSION}/cmake-${CMAKE_VERSION}.tar.gz \
+    && tar -zxvf cmake-${CMAKE_VERSION}.tar.gz \
+    && cd cmake-${CMAKE_VERSION} \
+    && ./bootstrap \
+    && make \
+    && make install \
+    && rm -rfv cmake-${CMAKE_VERSION}.tar.gz \
+    && rm -rfv cmake-${CMAKE_VERSION}
 
 COPY docker-entrypoint.sh /usr/local/bin/
 

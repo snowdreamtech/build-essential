@@ -20,13 +20,7 @@ RUN set -eux \
     && apt-get -qqy update  \
     && apt-get -qqy install \ 
     build-essential \ 
-    && apt-get -qqy --purge autoremove \
-    && apt-get -qqy clean \
-    && rm -rf /var/lib/apt/lists/* \
-    && rm -rf /tmp/* \
-    && rm -rf /var/tmp/*
-
-RUN set -eux \
+    libssl-dev \
     && wget -c https://github.com/Kitware/CMake/archive/refs/tags/v${CMAKE_VERSION}.tar.gz -O cmake-${CMAKE_VERSION}.tar.gz \
     && tar -zxvf cmake-${CMAKE_VERSION}.tar.gz \
     && cd CMake-${CMAKE_VERSION} \
@@ -35,7 +29,12 @@ RUN set -eux \
     && make install \
     && cd .. \
     && rm -rfv cmake-${CMAKE_VERSION}.tar.gz \
-    && rm -rfv CMake-${CMAKE_VERSION}
+    && rm -rfv CMake-${CMAKE_VERSION} \
+    && apt-get -qqy --purge autoremove \
+    && apt-get -qqy clean \
+    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /tmp/* \
+    && rm -rf /var/tmp/*
 
 COPY docker-entrypoint.sh /usr/local/bin/
 

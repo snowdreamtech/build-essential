@@ -17,6 +17,7 @@ ENV KEEPALIVE=1
 
 RUN apk add --no-cache \
     alpine-sdk \ 
+    openssl-dev \
     cmake   
 
 COPY docker-entrypoint.sh /usr/local/bin/

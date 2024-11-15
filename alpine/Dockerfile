@@ -18,6 +18,8 @@ ENV KEEPALIVE=1
 RUN apk add --no-cache \
     linux-headers \
     alpine-sdk \
+    clang18 \
+    clang18-dev \
     pkgconf \
     autoconf \
     automake \ 

@@ -21,6 +21,7 @@ RUN set -eux \
     && apt-get -qqy install \ 
     build-essential \ 
     libssl-dev \
+    cmake \
     && apt-get -qqy clean \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /tmp/* \

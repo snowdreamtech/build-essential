@@ -12,16 +12,12 @@ LABEL org.opencontainers.image.authors="Snowdream Tech" \
     org.opencontainers.image.version="12.7" \
     org.opencontainers.image.url="https://github.com/snowdreamtech/base"
 
-# keep the docker container running
-ENV CMAKE_VERSION=3.31.0
-
 RUN set -eux \
     && sed -i "s|Types:\s*deb.*|Types: deb deb-src|g" /etc/apt/sources.list.d/debian.sources \
     && apt-get -qqy update  \
     && apt-get -qqy install \ 
     build-essential \ 
     libssl-dev \
-    # cmake \
     && apt-get -qqy clean \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /tmp/* \
@@ -61,22 +57,6 @@ RUN set -eux \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /tmp/* \
     && rm -rf /var/tmp/* 
-
-RUN set -eux \
-    && wget -c https://github.com/Kitware/CMake/archive/refs/tags/v${CMAKE_VERSION}.tar.gz -O cmake-${CMAKE_VERSION}.tar.gz \
-    && tar -zxvf cmake-${CMAKE_VERSION}.tar.gz \
-    && cd CMake-${CMAKE_VERSION} \
-    && ./bootstrap \
-    && make \
-    && make install \
-    && cd .. \
-    && rm -rfv cmake-${CMAKE_VERSION}.tar.gz \
-    && rm -rfv CMake-${CMAKE_VERSION} \
-    && apt-get -qqy --purge autoremove \
-    && apt-get -qqy clean \
-    && rm -rf /var/lib/apt/lists/* \
-    && rm -rf /tmp/* \
-    && rm -rf /var/tmp/*
 
 COPY docker-entrypoint.sh /usr/local/bin/
 

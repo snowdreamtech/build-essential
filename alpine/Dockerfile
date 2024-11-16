@@ -19,8 +19,7 @@ RUN apk add --no-cache \
     alpine-sdk \ 
     openssl-dev \
     clang18 \
-    clang18-dev \
-    cmake   
+    clang18-dev
 
 COPY docker-entrypoint.sh /usr/local/bin/
 

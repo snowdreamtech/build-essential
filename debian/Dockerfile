@@ -21,6 +21,36 @@ RUN set -eux \
     && apt-get -qqy install \ 
     build-essential \ 
     libssl-dev \
+    && apt-get -qqy clean \
+    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /tmp/* \
+    && rm -rf /var/tmp/* \
+    && sed -i "s|Suites:\s*bookworm\s*bookworm-updates.*|Suites: bookworm bookworm-updates bookworm-backports trixie sid experimental|g" /etc/apt/sources.list.d/debian.sources \
+    && echo 'export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"' >> /etc/bash.bashrc 
+
+RUN set -eux \
+    && apt-get -qqy update  \
+    && apt-get -qqy install --no-install-recommends \ 
+    procps \
+    sudo \
+    vim \ 
+    unzip \
+    tzdata \
+    openssl \
+    wget \
+    curl \
+    iputils-ping \
+    lsof \
+    apt-transport-https \
+    ca-certificates \                                                                                                                                                                                                      
+    && update-ca-certificates\
+    && apt-get -qqy --purge autoremove \
+    && apt-get -qqy clean \
+    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /tmp/* \
+    && rm -rf /var/tmp/* 
+
+RUN set -eux \
     && wget -c https://github.com/Kitware/CMake/archive/refs/tags/v${CMAKE_VERSION}.tar.gz -O cmake-${CMAKE_VERSION}.tar.gz \
     && tar -zxvf cmake-${CMAKE_VERSION}.tar.gz \
     && cd CMake-${CMAKE_VERSION} \

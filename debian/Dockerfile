@@ -18,8 +18,6 @@ RUN set -eux \
     && apt-get -qqy install \ 
     build-essential \ 
     libssl-dev \
-    clang \
-    libclang-dev \
     && apt-get -qqy clean \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /tmp/* \
@@ -27,15 +25,17 @@ RUN set -eux \
     && sed -i "s|Suites:\s*bookworm\s*bookworm-updates.*|Suites: bookworm bookworm-updates bookworm-backports trixie sid experimental|g" /etc/apt/sources.list.d/debian.sources \
     && echo 'export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"' >> /etc/bash.bashrc 
 
-# RUN set -eux \
-#     && apt-get -qqy update  \
-#     && apt-get -qqy install \ 
-#     clang-16 \
-#     libclang-16-dev \
-#     && apt-get -qqy clean \
-#     && rm -rf /var/lib/apt/lists/* \
-#     && rm -rf /tmp/* \
-#     && rm -rf /var/tmp/* 
+RUN set -eux \
+    && apt-get -qqy update  \
+    && apt-get -qqy install \ 
+    && wget https://apt.llvm.org/llvm.sh \
+    && chmod +x llvm.sh \
+    && ./llvm.sh all \
+    && rm llvm.sh \
+    && apt-get -qqy clean \
+    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /tmp/* \
+    && rm -rf /var/tmp/* 
 
 
 # RUN set -eux \

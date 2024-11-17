@@ -25,7 +25,6 @@ RUN apk add --no-cache \
     lld \
     musl-dev \
     compiler-rt \
-    compiler-rt-static \
     cmake \
     ninja \
     python3 \

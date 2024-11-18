@@ -17,17 +17,19 @@ ENV KEEPALIVE=1
 
 RUN apk add --no-cache \
     alpine-sdk \ 
+    linux-headers \
     openssl-dev \
-    clang18 \
-    clang18-dev \
-    llvm18 \
-    llvm18-dev \
-    lld \
-    musl-dev \
-    compiler-rt \
-    cmake \
-    ninja \
+    autoconf \
+    automake \
+    libtool \
+    gdb \
+    flex \
+    bison \
+    perl \
+    lz4 \
     python3 \
+    ninja-build \
+    ncurses-dev \
     vim
 
 COPY vimrc.local /etc/vim/vimrc.local

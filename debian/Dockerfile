@@ -12,12 +12,16 @@ LABEL org.opencontainers.image.authors="Snowdream Tech" \
     org.opencontainers.image.version="12.7" \
     org.opencontainers.image.url="https://github.com/snowdreamtech/base"
 
+# keep the docker container running
+ENV KEEPALIVE=1
+
 RUN set -eux \
     && sed -i "s|Types:\s*deb.*|Types: deb deb-src|g" /etc/apt/sources.list.d/debian.sources \
     && apt-get -qqy update  \
     && apt-get -qqy install \ 
     build-essential \ 
     linux-headers-$(uname -r) \
+    libssl-dev \
     autoconf \
     automake \
     libtool \
@@ -26,7 +30,6 @@ RUN set -eux \
     bison \
     perl \
     lz4 \
-    libssl-dev \
     python3 \
     ninja-build \
     ncurses-dev \

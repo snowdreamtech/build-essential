@@ -19,6 +19,7 @@ RUN apk add --no-cache \
     alpine-sdk \ 
     linux-headers \
     openssl-dev \
+    cmake \
     autoconf \
     automake \
     libtool \

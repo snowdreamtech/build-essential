@@ -9,7 +9,7 @@ LABEL org.opencontainers.image.authors="Snowdream Tech" \
     org.opencontainers.image.licenses="MIT" \
     org.opencontainers.image.source="https://github.com/snowdreamtech/base" \
     org.opencontainers.image.vendor="Snowdream Tech" \
-    org.opencontainers.image.version="12.7" \
+    org.opencontainers.image.version="12.8" \
     org.opencontainers.image.url="https://github.com/snowdreamtech/base"
 
 # keep the docker container running
@@ -22,11 +22,11 @@ RUN set -eux \
     build-essential \ 
     # linux-headers-$(uname -r) \
     libssl-dev \
-    # cmake \
+    cmake \
     autoconf \
     automake \
     libtool \
-    # gdb \
+    gdb \
     flex \
     bison \
     perl \
@@ -39,23 +39,8 @@ RUN set -eux \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /tmp/* \
-    && rm -rf /var/tmp/* \
-    && sed -i "s|Suites:\s*bookworm\s*bookworm-updates.*|Suites: bookworm bookworm-updates bookworm-backports trixie sid experimental|g" /etc/apt/sources.list.d/debian.sources \
-    && echo 'export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"' >> /etc/bash.bashrc 
+    && rm -rf /var/tmp/* 
 
-# RUN set -eux \
-#     && sed -i "s|Types:\s*deb.*|Types: deb deb-src|g" /etc/apt/sources.list.d/debian.sources \
-#     && apt-get update -y \
-#     && apt-get install -y \ 
-#     build-essential \ 
-#     # linux-headers-$(uname -r) \
-#     # cmake \
-#     # gdb \
-#     && apt-get autoremove -y \
-#     && apt-get clean -y \
-#     && rm -rf /var/lib/apt/lists/* \
-#     && rm -rf /tmp/* \
-#     && rm -rf /var/tmp/* 
 
 COPY docker-entrypoint.sh /usr/local/bin/
 

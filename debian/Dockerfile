@@ -16,17 +16,14 @@ LABEL org.opencontainers.image.authors="Snowdream Tech" \
 ENV KEEPALIVE=1
 
 RUN set -eux \
-    && sed -i "s|Types:\s*deb.*|Types: deb deb-src|g" /etc/apt/sources.list.d/debian.sources \
     && apt-get update -y \
     && apt-get install -y \ 
     build-essential \ 
     # linux-headers-$(uname -r) \
     libssl-dev \
-    # cmake \
     autoconf \
     automake \
     libtool \
-    # gdb \
     flex \
     bison \
     perl \
@@ -39,8 +36,19 @@ RUN set -eux \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /tmp/* \
-    && rm -rf /var/tmp/* 
+    && rm -rf /var/tmp/*
 
+RUN set -eux \
+    && aptitude update -y \
+    && aptitude install -y \ 
+    # linux-headers-$(uname -r) \
+    cmake \
+    gdb \
+    && aptitude autoclean -y \
+    && aptitude clean -y \
+    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /tmp/* \
+    && rm -rf /var/tmp/* 
 
 COPY docker-entrypoint.sh /usr/local/bin/
 

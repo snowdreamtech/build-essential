@@ -20,7 +20,7 @@ RUN set -eux \
     && apt-get -qqy update  \
     && apt-get -qqy install \ 
     build-essential \ 
-    linux-headers-$(uname -r) \
+    # linux-headers-$(uname -r) \
     libssl-dev \
     autoconf \
     automake \

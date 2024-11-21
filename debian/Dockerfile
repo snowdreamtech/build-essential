@@ -15,6 +15,9 @@ LABEL org.opencontainers.image.authors="Snowdream Tech" \
 # keep the docker container running
 ENV KEEPALIVE=1 \
     CMAKE_VERSION=3.31.0 \
+    GMP_VERSION=6.3.0 \
+    MPFR_VERSION=4.2.1\
+    MPC_VERSION=1.3.1\
     GDB_VERSION=15.2
 
 RUN set -eux \
@@ -42,20 +45,54 @@ RUN set -eux \
 
 RUN set -eux \
     && aptitude update -y \
+    # Compile GMP
+    && wget https://ftp.gnu.org/gnu/gmp/gmp-${GMP_VERSION}.tar.gz \
+    && tar zxvf gmp-${GMP_VERSION}.tar.gz \
+    && cd gmp-${GMP_VERSION} \
+    && ./configure \
+    && make -j$(nproc) \
+    && make install \
+    && cd .. \
+    && rm -rfv zxvf gmp-${GMP_VERSION}.tar.gz \
+    && rm -rfv zxvf gmp-${GMP_VERSION} \
+    # Compile MPFR
+    && wget https://ftp.gnu.org/gnu/mpfr/mpfr-${MPFR_VERSION}.tar.gz \
+    && tar zxvf mpfr-${MPFR_VERSION}.tar.gz \
+    && cd mpfr-${MPFR_VERSION} \
+    && ./configure \
+    && make -j$(nproc) \
+    && make install \
+    && cd .. \
+    && rm -rfv zxvf mpfr-${MPFR_VERSION}.tar.gz \
+    && rm -rfv zxvf mpfr-${MPFR_VERSION} \
+    # Compile MPC
+    && wget https://ftp.gnu.org/gnu/mpc/mpc-${MPC_VERSION}.tar.gz \
+    && tar zxvf mpc-${MPC_VERSION}.tar.gz \
+    && cd mpc-${MPC_VERSION} \
+    && ./configure \
+    && make -j$(nproc) \
+    && make install \
+    && cd .. \
+    && rm -rfv zxvf mpc-${MPC_VERSION}.tar.gz \
+    && rm -rfv zxvf mpc-${MPC_VERSION} \
+    # Compile Cmake
     && wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}.tar.gz \
     && tar zxvf cmake-${CMAKE_VERSION}.tar.gz \
     && cd cmake-${CMAKE_VERSION} \
     && ./bootstrap --parallel=$(nproc) \
     && make -j$(nproc) \
     && make install \
+    && cd .. \
     && rm -rfv zxvf cmake-${CMAKE_VERSION}.tar.gz \
     && rm -rfv zxvf cmake-${CMAKE_VERSION} \
+    # Compile GDB
     && wget https://ftp.gnu.org/gnu/gdb/gdb-${GDB_VERSION}.tar.gz \
     && tar zxvf gdb-${GDB_VERSION}.tar.gz \
     && cd gdb-${GDB_VERSION} \
     && ./configure \
     && make -j$(nproc) \
     && make install \
+    && cd .. \
     && rm -rfv zxvf gdb-${GDB_VERSION}.tar.gz \
     && rm -rfv zxvf gdb-${GDB_VERSION} \
     && aptitude autoclean -y \

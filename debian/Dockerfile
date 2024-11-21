@@ -25,7 +25,7 @@ RUN set -eux \
     autoconf \
     automake \
     libtool \
-    gdb \
+    # gdb \
     flex \
     bison \
     perl \
@@ -33,6 +33,7 @@ RUN set -eux \
     python3 \
     ninja-build \
     ncurses-dev \
+    && update-alternatives --install /usr/bin/python python /usr/bin/python3 3 \
     && apt-get -qqy clean \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /tmp/* \

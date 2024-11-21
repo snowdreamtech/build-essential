@@ -13,7 +13,8 @@ LABEL org.opencontainers.image.authors="Snowdream Tech" \
     org.opencontainers.image.url="https://github.com/snowdreamtech/base"
 
 # keep the docker container running
-ENV KEEPALIVE=1
+ENV KEEPALIVE=1 \
+    CMAKE_VERSION=3.31.0
 
 RUN set -eux \
     && apt-get update -y \
@@ -24,7 +25,6 @@ RUN set -eux \
     autoconf \
     automake \
     libtool \
-    gdb \
     flex \
     bison \
     perl \
@@ -39,17 +39,21 @@ RUN set -eux \
     && rm -rf /tmp/* \
     && rm -rf /var/tmp/*
 
-# RUN set -eux \
-#     && aptitude update -y \
-#     && aptitude install -y \ 
-#     # linux-headers-$(uname -r) \
-#     cmake \
-#     gdb \
-#     && aptitude autoclean -y \
-#     && aptitude clean -y \
-#     && rm -rf /var/lib/apt/lists/* \
-#     && rm -rf /tmp/* \
-#     && rm -rf /var/tmp/* 
+RUN set -eux \
+    && aptitude update -y \
+    && wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}.tar.gz \
+    && tar zxvf cmake-${CMAKE_VERSION}.tar.gz \
+    && cd cmake-${CMAKE_VERSION} \
+    && ./bootstrap --parallel=$(nproc) \
+    && make -j$(nproc) \
+    && make install \
+    && rm -rfv zxvf cmake-${CMAKE_VERSION}.tar.gz \
+    && rm -rfv zxvf cmake-${CMAKE_VERSION} \
+    && aptitude autoclean -y \
+    && aptitude clean -y \
+    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /tmp/* \
+    && rm -rf /var/tmp/* 
 
 COPY docker-entrypoint.sh /usr/local/bin/
 

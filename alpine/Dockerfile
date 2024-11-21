@@ -28,8 +28,10 @@ RUN apk add --no-cache \
     compiler-rt-static \
     cmake \
     ninja \
-    python3
-    
+    python3 \
+    vim
+
+COPY vimrc.local /etc/vim/vimrc.local
 
 COPY docker-entrypoint.sh /usr/local/bin/
 

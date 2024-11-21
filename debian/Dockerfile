@@ -17,11 +17,12 @@ ENV KEEPALIVE=1
 
 RUN set -eux \
     && sed -i "s|Types:\s*deb.*|Types: deb deb-src|g" /etc/apt/sources.list.d/debian.sources \
-    && apt-get -qqy update  \
-    && apt-get -qqy install \ 
+    && aptitude update -y \
+    && aptitude install -y \ 
     build-essential \ 
     # linux-headers-$(uname -r) \
     libssl-dev \
+    cmake \
     autoconf \
     automake \
     libtool \
@@ -34,7 +35,8 @@ RUN set -eux \
     ninja-build \
     ncurses-dev \
     && update-alternatives --install /usr/bin/python python /usr/bin/python3 3 \
-    && apt-get -qqy clean \
+    && aptitude autoclean -y \
+    && aptitude clean -y \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /tmp/* \
     && rm -rf /var/tmp/* \

@@ -26,7 +26,7 @@ RUN set -eux \
     autoconf \
     automake \
     libtool \
-    gdb \
+    # gdb \
     flex \
     bison \
     perl \

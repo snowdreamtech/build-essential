@@ -18,6 +18,7 @@ RUN set -eux \
     && apt-get -qqy install \ 
     build-essential \ 
     libssl-dev \
+    clang-16 \
     && apt-get -qqy clean \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /tmp/* \

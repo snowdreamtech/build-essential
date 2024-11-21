@@ -28,6 +28,18 @@ RUN set -eux \
 RUN set -eux \
     && apt-get -qqy update  \
     && apt-get -qqy install \ 
+    lsb-release \
+    wget \
+    software-properties-common \
+    gnupg \
+    && apt-get -qqy clean \
+    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /tmp/* \
+    && rm -rf /var/tmp/* 
+
+RUN set -eux \
+    && apt-get -qqy update  \
+    && apt-get -qqy install \ 
     && wget https://apt.llvm.org/llvm.sh \
     && chmod +x llvm.sh \
     && ./llvm.sh all \

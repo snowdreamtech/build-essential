@@ -14,7 +14,8 @@ LABEL org.opencontainers.image.authors="Snowdream Tech" \
 
 # keep the docker container running
 ENV KEEPALIVE=1 \
-    CMAKE_VERSION=3.31.0
+    CMAKE_VERSION=3.31.0 \
+    GDB_VERSION=15.2
 
 RUN set -eux \
     && apt-get update -y \
@@ -49,6 +50,14 @@ RUN set -eux \
     && make install \
     && rm -rfv zxvf cmake-${CMAKE_VERSION}.tar.gz \
     && rm -rfv zxvf cmake-${CMAKE_VERSION} \
+    && wget https://ftp.gnu.org/gnu/gdb/gdb-${GDB_VERSION}.tar.gz \
+    && tar zxvf gdb-${GDB_VERSION}.tar.gz \
+    && cd gdb-${GDB_VERSION} \
+    && ./configure \
+    && make -j$(nproc) \
+    && make install \
+    && rm -rfv zxvf gdb-${GDB_VERSION}.tar.gz \
+    && rm -rfv zxvf gdb-${GDB_VERSION} \
     && aptitude autoclean -y \
     && aptitude clean -y \
     && rm -rf /var/lib/apt/lists/* \

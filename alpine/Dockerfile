@@ -20,8 +20,16 @@ RUN apk add --no-cache \
     openssl-dev \
     clang18 \
     clang18-dev \
-    python3 \
-    cmake 
+    llvm18 \
+    llvm18-dev \
+    lld \
+    musl-dev \
+    compiler-rt \
+    compiler-rt-static \
+    cmake \
+    ninja \
+    python3
+    
 
 COPY docker-entrypoint.sh /usr/local/bin/
 

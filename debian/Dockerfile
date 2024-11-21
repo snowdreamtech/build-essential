@@ -24,6 +24,7 @@ RUN set -eux \
     autoconf \
     automake \
     libtool \
+    gdb \
     flex \
     bison \
     perl \
@@ -38,17 +39,17 @@ RUN set -eux \
     && rm -rf /tmp/* \
     && rm -rf /var/tmp/*
 
-RUN set -eux \
-    && aptitude update -y \
-    && aptitude install -y \ 
-    # linux-headers-$(uname -r) \
-    cmake \
-    gdb \
-    && aptitude autoclean -y \
-    && aptitude clean -y \
-    && rm -rf /var/lib/apt/lists/* \
-    && rm -rf /tmp/* \
-    && rm -rf /var/tmp/* 
+# RUN set -eux \
+#     && aptitude update -y \
+#     && aptitude install -y \ 
+#     # linux-headers-$(uname -r) \
+#     cmake \
+#     gdb \
+#     && aptitude autoclean -y \
+#     && aptitude clean -y \
+#     && rm -rf /var/lib/apt/lists/* \
+#     && rm -rf /tmp/* \
+#     && rm -rf /var/tmp/* 
 
 COPY docker-entrypoint.sh /usr/local/bin/
 

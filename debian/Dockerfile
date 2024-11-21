@@ -44,7 +44,8 @@ RUN set -eux \
     && rm -rf /var/tmp/*
 
 RUN set -eux \
-    && aptitude update -y \
+    && apt-get update -y \
+    && apt-get install -y \ 
     # Compile GMP
     && wget https://ftp.gnu.org/gnu/gmp/gmp-${GMP_VERSION}.tar.gz \
     && tar zxvf gmp-${GMP_VERSION}.tar.gz \
@@ -95,8 +96,8 @@ RUN set -eux \
     && cd .. \
     && rm -rfv zxvf gdb-${GDB_VERSION}.tar.gz \
     && rm -rfv zxvf gdb-${GDB_VERSION} \
-    && aptitude autoclean -y \
-    && aptitude clean -y \
+    && apt-get autoremove -y \
+    && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /tmp/* \
     && rm -rf /var/tmp/* 

@@ -55,16 +55,16 @@ RUN set -eux \
     && cd .. \
     && rm -rfv zxvf gmp-${GMP_VERSION}.tar.gz \
     && rm -rfv zxvf gmp-${GMP_VERSION} \
-#     # Compile MPFR
-#     && wget https://ftp.gnu.org/gnu/mpfr/mpfr-${MPFR_VERSION}.tar.gz \
-#     && tar zxvf mpfr-${MPFR_VERSION}.tar.gz \
-#     && cd mpfr-${MPFR_VERSION} \
-#     && ./configure \
-#     && make -j$(nproc) \
-#     && make install \
-#     && cd .. \
-#     && rm -rfv zxvf mpfr-${MPFR_VERSION}.tar.gz \
-#     && rm -rfv zxvf mpfr-${MPFR_VERSION} \
+    # Compile MPFR
+    && wget https://ftp.gnu.org/gnu/mpfr/mpfr-${MPFR_VERSION}.tar.gz \
+    && tar zxvf mpfr-${MPFR_VERSION}.tar.gz \
+    && cd mpfr-${MPFR_VERSION} \
+    && ./configure \
+    && make -j$(nproc) \
+    && make install \
+    && cd .. \
+    && rm -rfv zxvf mpfr-${MPFR_VERSION}.tar.gz \
+    && rm -rfv zxvf mpfr-${MPFR_VERSION} \
 #     # Compile MPC
 #     && wget https://ftp.gnu.org/gnu/mpc/mpc-${MPC_VERSION}.tar.gz \
 #     && tar zxvf mpc-${MPC_VERSION}.tar.gz \

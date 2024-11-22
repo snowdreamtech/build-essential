@@ -65,36 +65,36 @@ RUN set -eux \
     && cd .. \
     && rm -rfv zxvf mpfr-${MPFR_VERSION}.tar.gz \
     && rm -rfv zxvf mpfr-${MPFR_VERSION} \
-#     # Compile MPC
-#     && wget https://ftp.gnu.org/gnu/mpc/mpc-${MPC_VERSION}.tar.gz \
-#     && tar zxvf mpc-${MPC_VERSION}.tar.gz \
-#     && cd mpc-${MPC_VERSION} \
-#     && ./configure \
-#     && make -j$(nproc) \
-#     && make install \
-#     && cd .. \
-#     && rm -rfv zxvf mpc-${MPC_VERSION}.tar.gz \
-#     && rm -rfv zxvf mpc-${MPC_VERSION} \
-#     # Compile Cmake
-#     && wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}.tar.gz \
-#     && tar zxvf cmake-${CMAKE_VERSION}.tar.gz \
-#     && cd cmake-${CMAKE_VERSION} \
-#     && ./bootstrap --parallel=$(nproc) \
-#     && make -j$(nproc) \
-#     && make install \
-#     && cd .. \
-#     && rm -rfv zxvf cmake-${CMAKE_VERSION}.tar.gz \
-#     && rm -rfv zxvf cmake-${CMAKE_VERSION} \
-#     # Compile GDB
-#     && wget https://ftp.gnu.org/gnu/gdb/gdb-${GDB_VERSION}.tar.gz \
-#     && tar zxvf gdb-${GDB_VERSION}.tar.gz \
-#     && cd gdb-${GDB_VERSION} \
-#     && ./configure \
-#     && make -j$(nproc) \
-#     && make install \
-#     && cd .. \
-#     && rm -rfv zxvf gdb-${GDB_VERSION}.tar.gz \
-#     && rm -rfv zxvf gdb-${GDB_VERSION} \
+    # Compile MPC
+    && wget https://ftp.gnu.org/gnu/mpc/mpc-${MPC_VERSION}.tar.gz \
+    && tar zxvf mpc-${MPC_VERSION}.tar.gz \
+    && cd mpc-${MPC_VERSION} \
+    && ./configure \
+    && make -j$(nproc) \
+    && make install \
+    && cd .. \
+    && rm -rfv zxvf mpc-${MPC_VERSION}.tar.gz \
+    && rm -rfv zxvf mpc-${MPC_VERSION} \
+    # Compile Cmake
+    && wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}.tar.gz \
+    && tar zxvf cmake-${CMAKE_VERSION}.tar.gz \
+    && cd cmake-${CMAKE_VERSION} \
+    && ./bootstrap --parallel=$(nproc) \
+    && make -j$(nproc) \
+    && make install \
+    && cd .. \
+    && rm -rfv zxvf cmake-${CMAKE_VERSION}.tar.gz \
+    && rm -rfv zxvf cmake-${CMAKE_VERSION} \
+    # Compile GDB
+    && wget https://ftp.gnu.org/gnu/gdb/gdb-${GDB_VERSION}.tar.gz \
+    && tar zxvf gdb-${GDB_VERSION}.tar.gz \
+    && cd gdb-${GDB_VERSION} \
+    && ./configure \
+    && make -j$(nproc) \
+    && make install \
+    && cd .. \
+    && rm -rfv zxvf gdb-${GDB_VERSION}.tar.gz \
+    && rm -rfv zxvf gdb-${GDB_VERSION} \
     && apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/* \

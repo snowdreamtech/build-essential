@@ -26,6 +26,7 @@ RUN set -eux \
     build-essential \ 
     # linux-headers-$(uname -r) \
     libssl-dev \
+    cmake \
     autoconf \
     automake \
     libtool \

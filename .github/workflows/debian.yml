@@ -37,7 +37,7 @@ on:
 
 jobs:
   buildx:
-    runs-on: ubuntu-latest
+    runs-on: 8H16G
     steps:
       - name: Setup Vultr SSH
         uses: MrSquaare/ssh-setup-action@v3.1.0

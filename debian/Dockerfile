@@ -24,84 +24,84 @@ RUN set -eux \
     && apt-get update -y \
     && apt-get install -y \ 
     build-essential \ 
-    # linux-headers-$(uname -r) \
-    libssl-dev \
-    # cmake \
-    autoconf \
-    automake \
-    libtool \
-    # gdb \
-    flex \
-    bison \
-    perl \
-    lz4 \
-    python3 \
-    ninja-build \
-    ncurses-dev \
-    && update-alternatives --install /usr/bin/python python /usr/bin/python3 3 \
+    cmake \
+    # # linux-headers-$(uname -r) \
+    # libssl-dev \
+    # autoconf \
+    # automake \
+    # libtool \
+    # # gdb \
+    # flex \
+    # bison \
+    # perl \
+    # lz4 \
+    # python3 \
+    # ninja-build \
+    # ncurses-dev \
+    # && update-alternatives --install /usr/bin/python python /usr/bin/python3 3 \
     && apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /tmp/* \
     && rm -rf /var/tmp/*
 
-RUN set -eux \
-    && apt-get update -y \
-    # Compile GMP
-    && wget https://ftp.gnu.org/gnu/gmp/gmp-${GMP_VERSION}.tar.gz \
-    && tar zxvf gmp-${GMP_VERSION}.tar.gz \
-    && cd gmp-${GMP_VERSION} \
-    && ./configure \
-    && make -j$(nproc) \
-    && make install \
-    && cd .. \
-    && rm -rfv zxvf gmp-${GMP_VERSION}.tar.gz \
-    && rm -rfv zxvf gmp-${GMP_VERSION} \
-    # Compile MPFR
-    && wget https://ftp.gnu.org/gnu/mpfr/mpfr-${MPFR_VERSION}.tar.gz \
-    && tar zxvf mpfr-${MPFR_VERSION}.tar.gz \
-    && cd mpfr-${MPFR_VERSION} \
-    && ./configure \
-    && make -j$(nproc) \
-    && make install \
-    && cd .. \
-    && rm -rfv zxvf mpfr-${MPFR_VERSION}.tar.gz \
-    && rm -rfv zxvf mpfr-${MPFR_VERSION} \
-    # Compile MPC
-    && wget https://ftp.gnu.org/gnu/mpc/mpc-${MPC_VERSION}.tar.gz \
-    && tar zxvf mpc-${MPC_VERSION}.tar.gz \
-    && cd mpc-${MPC_VERSION} \
-    && ./configure \
-    && make -j$(nproc) \
-    && make install \
-    && cd .. \
-    && rm -rfv zxvf mpc-${MPC_VERSION}.tar.gz \
-    && rm -rfv zxvf mpc-${MPC_VERSION} \
-    # Compile Cmake
-    && wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}.tar.gz \
-    && tar zxvf cmake-${CMAKE_VERSION}.tar.gz \
-    && cd cmake-${CMAKE_VERSION} \
-    && ./bootstrap --parallel=$(nproc) \
-    && make -j$(nproc) \
-    && make install \
-    && cd .. \
-    && rm -rfv zxvf cmake-${CMAKE_VERSION}.tar.gz \
-    && rm -rfv zxvf cmake-${CMAKE_VERSION} \
-    # Compile GDB
-    && wget https://ftp.gnu.org/gnu/gdb/gdb-${GDB_VERSION}.tar.gz \
-    && tar zxvf gdb-${GDB_VERSION}.tar.gz \
-    && cd gdb-${GDB_VERSION} \
-    && ./configure \
-    && make -j$(nproc) \
-    && make install \
-    && cd .. \
-    && rm -rfv zxvf gdb-${GDB_VERSION}.tar.gz \
-    && rm -rfv zxvf gdb-${GDB_VERSION} \
-    && apt-get autoremove -y \
-    && apt-get clean -y \
-    && rm -rf /var/lib/apt/lists/* \
-    && rm -rf /tmp/* \
-    && rm -rf /var/tmp/* 
+# RUN set -eux \
+#     && apt-get update -y \
+#     # Compile GMP
+#     && wget https://ftp.gnu.org/gnu/gmp/gmp-${GMP_VERSION}.tar.gz \
+#     && tar zxvf gmp-${GMP_VERSION}.tar.gz \
+#     && cd gmp-${GMP_VERSION} \
+#     && ./configure \
+#     && make -j$(nproc) \
+#     && make install \
+#     && cd .. \
+#     && rm -rfv zxvf gmp-${GMP_VERSION}.tar.gz \
+#     && rm -rfv zxvf gmp-${GMP_VERSION} \
+#     # Compile MPFR
+#     && wget https://ftp.gnu.org/gnu/mpfr/mpfr-${MPFR_VERSION}.tar.gz \
+#     && tar zxvf mpfr-${MPFR_VERSION}.tar.gz \
+#     && cd mpfr-${MPFR_VERSION} \
+#     && ./configure \
+#     && make -j$(nproc) \
+#     && make install \
+#     && cd .. \
+#     && rm -rfv zxvf mpfr-${MPFR_VERSION}.tar.gz \
+#     && rm -rfv zxvf mpfr-${MPFR_VERSION} \
+#     # Compile MPC
+#     && wget https://ftp.gnu.org/gnu/mpc/mpc-${MPC_VERSION}.tar.gz \
+#     && tar zxvf mpc-${MPC_VERSION}.tar.gz \
+#     && cd mpc-${MPC_VERSION} \
+#     && ./configure \
+#     && make -j$(nproc) \
+#     && make install \
+#     && cd .. \
+#     && rm -rfv zxvf mpc-${MPC_VERSION}.tar.gz \
+#     && rm -rfv zxvf mpc-${MPC_VERSION} \
+#     # Compile Cmake
+#     && wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}.tar.gz \
+#     && tar zxvf cmake-${CMAKE_VERSION}.tar.gz \
+#     && cd cmake-${CMAKE_VERSION} \
+#     && ./bootstrap --parallel=$(nproc) \
+#     && make -j$(nproc) \
+#     && make install \
+#     && cd .. \
+#     && rm -rfv zxvf cmake-${CMAKE_VERSION}.tar.gz \
+#     && rm -rfv zxvf cmake-${CMAKE_VERSION} \
+#     # Compile GDB
+#     && wget https://ftp.gnu.org/gnu/gdb/gdb-${GDB_VERSION}.tar.gz \
+#     && tar zxvf gdb-${GDB_VERSION}.tar.gz \
+#     && cd gdb-${GDB_VERSION} \
+#     && ./configure \
+#     && make -j$(nproc) \
+#     && make install \
+#     && cd .. \
+#     && rm -rfv zxvf gdb-${GDB_VERSION}.tar.gz \
+#     && rm -rfv zxvf gdb-${GDB_VERSION} \
+#     && apt-get autoremove -y \
+#     && apt-get clean -y \
+#     && rm -rf /var/lib/apt/lists/* \
+#     && rm -rf /tmp/* \
+#     && rm -rf /var/tmp/* 
 
 COPY docker-entrypoint.sh /usr/local/bin/
 

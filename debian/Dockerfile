@@ -27,7 +27,7 @@ RUN set -eux \
     cmake \
     gdb \
     # # linux-headers-$(uname -r) \
-    # libssl-dev \
+    libssl-dev \
     autoconf \
     automake \
     libtool \

@@ -17,13 +17,13 @@ ENV KEEPALIVE=1
 
 RUN apk add --no-cache \
     alpine-sdk \ 
+    cmake \
+    gdb \
     linux-headers \
     openssl-dev \
-    cmake \
     autoconf \
-    automake \
+    automake \  
     libtool \
-    gdb \
     flex \
     bison \
     perl \

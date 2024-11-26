@@ -25,12 +25,12 @@ RUN set -eux \
     && apt-get install -y \ 
     build-essential \ 
     cmake \
+    gdb \
     # # linux-headers-$(uname -r) \
     # libssl-dev \
     autoconf \
     automake \
     libtool \
-    # # gdb \
     flex \
     bison \
     perl \

@@ -35,10 +35,10 @@ RUN set -eux \
     bison \
     perl \
     lz4 \
-    # python3 \
+    python3 \
     ninja-build \
     ncurses-dev \
-    # && update-alternatives --install /usr/bin/python python /usr/bin/python3 3 \
+    && update-alternatives --install /usr/bin/python python /usr/bin/python3 3 \
     && apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/* \

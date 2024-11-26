@@ -27,17 +27,17 @@ RUN set -eux \
     cmake \
     # # linux-headers-$(uname -r) \
     # libssl-dev \
-    # autoconf \
-    # automake \
-    # libtool \
+    autoconf \
+    automake \
+    libtool \
     # # gdb \
-    # flex \
-    # bison \
-    # perl \
-    # lz4 \
+    flex \
+    bison \
+    perl \
+    lz4 \
     # python3 \
-    # ninja-build \
-    # ncurses-dev \
+    ninja-build \
+    ncurses-dev \
     # && update-alternatives --install /usr/bin/python python /usr/bin/python3 3 \
     && apt-get autoremove -y \
     && apt-get clean -y \

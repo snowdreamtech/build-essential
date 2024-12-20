@@ -1,8 +1,8 @@
-# Base
+# build-essential
 
-[![Base](http://dockeri.co/image/snowdreamtech/base)](https://hub.docker.com/r/snowdreamtech/base)
+[![build-essential](http://dockeri.co/image/snowdreamtech/build-essential)](https://hub.docker.com/r/snowdreamtech/build-essential)
 
-Docker Image packaging for Base. (amd64, arm32v5,  arm32v6, arm32v7, arm64v8, i386, mips64le, ppc64le,riscv64, s390x)
+Docker Image packaging for build-essential. (amd64, arm32v5,  arm32v6, arm32v7, arm64v8, i386, mips64le, ppc64le,riscv64, s390x)
 
 # Usage
 
@@ -14,21 +14,21 @@ To help you get started creating a container from this image you can either use 
 
 ```bash
 docker run -d \
-  --name=base \
+  --name=build-essential \
   -e TZ=Asia/Shanghai \
   --restart unless-stopped \
-  snowdreamtech/base:latest
+  snowdreamtech/build-essential:latest
 ```
 
 ### Advance
 
 ```bash
 docker run -d \
-  --name=base \
+  --name=build-essential \
   -e TZ=Asia/Shanghai \
   -v /path/to/data:/path/to/data \
   --restart unless-stopped \
-  snowdreamtech/base:latest
+  snowdreamtech/build-essential:latest
 ```
 
 ## Docker Compose
@@ -37,9 +37,9 @@ docker run -d \
 
 ```bash
 services:
-  base:
-    image: snowdreamtech/base:latest
-    container_name: base
+  build-essential:
+    image: snowdreamtech/build-essential:latest
+    container_name: build-essential
     environment:
       - TZ=Asia/Shanghai
     restart: unless-stopped
@@ -49,9 +49,9 @@ services:
 
 ```bash
 services:
-  base:
-    image: snowdreamtech/base:latest
-    container_name: base
+  build-essential:
+    image: snowdreamtech/build-essential:latest
+    container_name: build-essential
     environment:
       - TZ=Asia/Shanghai
     volumes:
@@ -63,7 +63,7 @@ services:
 
 ```bash
 docker buildx create --use --name build --node build --driver-opt network=host
-docker buildx build -t snowdreamtech/base --platform=linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64,linux/ppc64le,linux/riscv64,linux/s390x . --push
+docker buildx build -t snowdreamtech/build-essential --platform=linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64,linux/ppc64le,linux/riscv64,linux/s390x . --push
 ```
 
 ## Reference
@@ -75,7 +75,7 @@ docker buildx build -t snowdreamtech/base --platform=linux/386,linux/amd64,linux
 1. [Faster Multi-Platform Builds: Dockerfile Cross-Compilation Guide](https://www.docker.com/blog/faster-multi-platform-builds-dockerfile-cross-compilation-guide/)
 1. [docker/buildx](https://github.com/docker/buildx)
 
-## Contact (备注：base)
+## Contact (备注：build-essential)
 
 * Email: sn0wdr1am@qq.com
 * QQ: 3217680847

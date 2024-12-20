@@ -2,23 +2,20 @@ FROM snowdreamtech/debian:12.8.0
 
 # OCI annotations to image
 LABEL org.opencontainers.image.authors="Snowdream Tech" \
-    org.opencontainers.image.title="Base Image Based On Debian" \
-    org.opencontainers.image.description="Docker Images for Base on Debian. (i386,amd64,arm32v5,arm32v7,arm64,mips64le,ppc64le,s390x)" \
-    org.opencontainers.image.documentation="https://hub.docker.com/r/snowdreamtech/base" \
-    org.opencontainers.image.base.name="snowdreamtech/base:debian" \
+    org.opencontainers.image.title="build-essential Image Based On Debian" \
+    org.opencontainers.image.description="Docker Images for build-essential on Debian. (i386,amd64,arm32v5,arm32v7,arm64,mips64le,ppc64le,s390x)" \
+    org.opencontainers.image.documentation="https://hub.docker.com/r/snowdreamtech/build-essential" \
+    org.opencontainers.image.base.name="snowdreamtech/build-essential:debian" \
     org.opencontainers.image.licenses="MIT" \
-    org.opencontainers.image.source="https://github.com/snowdreamtech/base" \
+    org.opencontainers.image.source="https://github.com/snowdreamtech/build-essential" \
     org.opencontainers.image.vendor="Snowdream Tech" \
     org.opencontainers.image.version="12.8" \
-    org.opencontainers.image.url="https://github.com/snowdreamtech/base"
-
-# keep the docker container running
-ENV KEEPALIVE=1
+    org.opencontainers.image.url="https://github.com/snowdreamtech/build-essential"
 
 ARG GID=1000 \
     UID=1000  \
-    USER=base \
-    WORKDIR=/home/base
+    USER=build \
+    WORKDIR=/home/build
 
 # Create a user with UID and GID
 RUN set -eux \
@@ -34,11 +31,26 @@ RUN set -eux \
     && rm -rf /var/tmp/* 
 
 RUN set -eux \
-    && apt-get -qqy update  \
-    && apt-get -qqy install --no-install-recommends \ 
-    vim \
-    && apt-get -qqy --purge autoremove \
-    && apt-get -qqy clean \
+    && apt-get update -y \
+    && apt-get install -y \ 
+    build-essential \ 
+    cmake \
+    gdb \
+    # # linux-headers-$(uname -r) \
+    libssl-dev \
+    autoconf \
+    automake \
+    libtool \
+    flex \
+    bison \
+    perl \
+    lz4 \
+    python3 \
+    ninja-build \
+    ncurses-dev \
+    && update-alternatives --install /usr/bin/python python /usr/bin/python3 3 \
+    && apt-get autoremove -y \
+    && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /tmp/* \
     && rm -rf /var/tmp/*

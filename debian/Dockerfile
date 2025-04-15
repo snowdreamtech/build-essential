@@ -1,4 +1,4 @@
-FROM snowdreamtech/debian:12.8.0
+FROM snowdreamtech/debian:12.10.0
 
 # OCI annotations to image
 LABEL org.opencontainers.image.authors="Snowdream Tech" \
@@ -9,7 +9,7 @@ LABEL org.opencontainers.image.authors="Snowdream Tech" \
     org.opencontainers.image.licenses="MIT" \
     org.opencontainers.image.source="https://github.com/snowdreamtech/build-essential" \
     org.opencontainers.image.vendor="Snowdream Tech" \
-    org.opencontainers.image.version="12.8" \
+    org.opencontainers.image.version="12.10.0" \
     org.opencontainers.image.url="https://github.com/snowdreamtech/build-essential"
 
 ARG GID=1000 \

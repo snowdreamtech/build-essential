@@ -302,9 +302,9 @@ jobs:
         uses: docker/metadata-action@80c7e94dd9b9319bd5eb7a0e0fe9291e23a2a2e9 # v6.1.0
         with:
           images: |
-            name=snowdreamtech/base,enable=true
-            name=ghcr.io/snowdreamtech/base,enable=true
-            name=quay.io/snowdreamtech/base,enable=true
+            name=snowdreamtech/build-essential,enable=true
+            name=ghcr.io/snowdreamtech/build-essential,enable=true
+            name=quay.io/snowdreamtech/build-essential,enable=true
           flavor: |
             latest=false
             prefix=
@@ -484,6 +484,52 @@ jobs:
                 printf '  ✓ User context: ' && id -un && \
                 printf '  ✓ Package manager: ' && \
                 ${pkg_check} && echo 'functional' && \
+                printf '  ✓ GCC: ' && gcc --version | head -n 1 && \
+                printf '  ✓ G++: ' && g++ --version | head -n 1 && \
+                printf '  ✓ Make: ' && make --version | head -n 1 && \
+                printf '  ✓ CMake: ' && cmake --version | head -n 1 && \
+                printf '  ✓ Ninja: ' && ninja --version | head -n 1 && \
+                printf '  ✓ Meson: ' && meson --version | head -n 1 && \
+                printf '  ✓ Autoconf: ' && autoconf --version | head -n 1 && \
+                printf '  ✓ Automake: ' && automake --version | head -n 1 && \
+                printf '  ✓ Libtool: ' && libtool --version | head -n 1 && \
+                printf '  ✓ M4: ' && m4 --version | head -n 1 && \
+                printf '  ✓ Patch: ' && patch --version | head -n 1 && \
+                printf '  ✓ Flex: ' && flex --version | head -n 1 && \
+                printf '  ✓ Bison: ' && bison --version | head -n 1 && \
+                printf '  ✓ CCache: ' && ccache --version | head -n 1 && \
+                printf '  ✓ Perl: ' && perl --version | head -n 2 | tail -n 1 && \
+                printf '  ✓ Python3: ' && python3 --version | head -n 1 && \
+                printf '  ✓ Gettext: ' && msgfmt --version | head -n 1 && \
+                printf '  ✓ Git: ' && git --version | head -n 1 && \
+                printf '  ✓ Curl: ' && curl --version | head -n 1 && \
+                printf '  ✓ Wget: ' && wget --version | head -n 1 && \
+                printf '  ✓ Tar: ' && tar --version | head -n 1 && \
+                printf '  ✓ Unzip: ' && unzip -v | head -n 1 && \
+                printf '  ✓ Zip: ' && zip -v | head -n 2 | tail -n 1 && \
+                printf '  ✓ Bzip2: ' && bzip2 -h 2>&1 | head -n 1 && \
+                printf '  ✓ Gzip: ' && gzip --version | head -n 1 && \
+                printf '  ✓ XZ: ' && xz --version | head -n 1 && \
+                printf '  ✓ Zstd: ' && zstd --version | head -n 1 && \
+                printf '  ✓ JQ: ' && jq --version | head -n 1 && \
+                printf '  ✓ File: ' && file --version | head -n 1 && \
+                printf '  ✓ Tree: ' && tree --version | head -n 1 && \
+                printf '  ✓ Rsync: ' && rsync --version | head -n 1 && \
+                printf '  ✓ Bash: ' && bash --version | head -n 1 && \
+                printf '  ✓ Gawk: ' && gawk --version | head -n 1 && \
+                printf '  ✓ BC: ' && bc --version | head -n 1 && \
+                printf '  ✓ Dos2Unix: ' && dos2unix --version 2>&1 | head -n 1 && \
+                printf '  ✓ PkgConfig: ' && pkg-config --version | head -n 1 && \
+                printf '  ✓ GDB: ' && gdb --version | head -n 1 && \
+                printf '  ✓ Strace: ' && strace --version | head -n 1 && \
+                printf '  ✓ Valgrind: ' && valgrind --version | head -n 1 && \
+                printf '  ✓ GFortran: ' && gfortran --version | head -n 1 && \
+                printf '  ✓ Sudo: ' && sudo --version | head -n 1 && \
+                printf '  ✓ Fakeroot: ' && fakeroot -v | head -n 1 && \
+                printf '  ✓ Nasm: ' && nasm -v | head -n 1 && \
+                printf '  ✓ Yasm: ' && yasm --version | head -n 1 && \
+                printf '  ✓ Swig: ' && swig -version | head -n 2 | tail -n 1 && \
+                printf '  ✓ Gperf: ' && gperf --version | head -n 1 && \
                 echo '  ✓ All checks passed'
               "; then
               return 0
@@ -593,7 +639,7 @@ jobs:
         uses: github/codeql-action/upload-sarif@8aad20d150bbac5944a9f9d289da16a4b0d87c1e # v4.36.2
         with:
           sarif_file: "trivy-image-${{ matrix.variant }}.sarif"
-          category: "trivy-image-base-${{ matrix.variant }}"
+          category: "trivy-image-build-essential-${{ matrix.variant }}"
 
       - name: "🗑️ Clean Up Build Artifacts"
         if: steps.variant-filter.outputs.skip != 'true' && always()

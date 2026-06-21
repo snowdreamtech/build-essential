@@ -101,23 +101,19 @@ RUN set -eux \
     libreadline-dev \
     libffi-dev \
     libsqlite3-dev \
-    gdb \
-    strace \
-    valgrind \
-    ltrace \
-    libelf-dev \
     gfortran \
     sudo \
     fakeroot \
     texinfo \
     libexpat1-dev \
-    nasm \
-    yasm \
     swig \
     gperf \
     libbz2-dev \
     liblzma-dev \
     libzstd-dev \
+    && for pkg in gdb strace valgrind ltrace libelf-dev nasm yasm; do \
+        DEBIAN_FRONTEND=noninteractive apt-get -qqy install --no-install-recommends $pkg || echo "Package $pkg not available on this architecture, skipping."; \
+    done \
     && DEBIAN_FRONTEND=noninteractive apt-get -qqy --purge autoremove \
     && DEBIAN_FRONTEND=noninteractive apt-get -qqy clean \
     && rm -rf /var/lib/apt/lists/* \

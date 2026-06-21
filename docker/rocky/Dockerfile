@@ -99,23 +99,19 @@ RUN set -eux \
     readline-devel \
     libffi-devel \
     sqlite-devel \
-    gdb \
-    strace \
-    valgrind \
-    ltrace \
-    elfutils-libelf-devel \
     gcc-gfortran \
     sudo \
     fakeroot \
     texinfo \
     expat-devel \
-    nasm \
-    yasm \
     swig \
     gperf \
     bzip2-devel \
     xz-devel \
     libzstd-devel \
+    && for pkg in gdb strace valgrind ltrace elfutils-libelf-devel nasm yasm; do \
+        dnf -y --allowerasing install $pkg || echo "Package $pkg not available on this architecture, skipping."; \
+    done \
     && dnf -y --allowerasing autoremove \
     && dnf -y --allowerasing clean all \
     && rm -rf /var/cache/dnf \

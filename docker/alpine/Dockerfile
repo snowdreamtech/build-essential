@@ -98,7 +98,6 @@ RUN apk update \
     libffi-dev \
     sqlite-dev \
     linux-headers \
-    elfutils-dev \
     gfortran \
     coreutils \
     findutils \
@@ -112,7 +111,7 @@ RUN apk update \
     bzip2-dev \
     xz-dev \
     zstd-dev \
-    && for pkg in gdb strace valgrind ltrace nasm yasm; do \
+    && for pkg in gdb strace valgrind ltrace elfutils-dev nasm yasm; do \
         apk add --no-cache $pkg || echo "Package $pkg not available on this architecture, skipping."; \
     done
 

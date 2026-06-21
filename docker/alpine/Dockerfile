@@ -97,10 +97,6 @@ RUN apk update \
     readline-dev \
     libffi-dev \
     sqlite-dev \
-    gdb \
-    strace \
-    valgrind \
-    ltrace \
     linux-headers \
     elfutils-dev \
     gfortran \
@@ -111,13 +107,14 @@ RUN apk update \
     fakeroot \
     texinfo \
     expat-dev \
-    nasm \
-    yasm \
     swig \
     gperf \
     bzip2-dev \
     xz-dev \
-    zstd-dev
+    zstd-dev \
+    && for pkg in gdb strace valgrind ltrace nasm yasm; do \
+        apk add --no-cache $pkg || echo "Package $pkg not available on this architecture, skipping."; \
+    done
 
 # Container Orchestration Files
 COPY entrypoint.d /usr/local/bin/entrypoint.d

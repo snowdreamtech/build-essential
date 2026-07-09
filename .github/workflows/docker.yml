@@ -101,7 +101,7 @@ jobs:
       packages: write
       id-token: write
       security-events: write
-    timeout-minutes: 60
+    timeout-minutes: 360
     env:
       TRIVY_CACHE_DIR: .trivycache
       BUILD_START_TIME: ${{ github.event.repository.updated_at }}
@@ -236,14 +236,14 @@ jobs:
 
       - name: "📂 Checkout Repository Code"
         if: steps.variant-filter.outputs.skip != 'true'
-        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           token: ${{ secrets.WORKFLOW_SECRET || secrets.GITHUB_TOKEN }}
           persist-credentials: false
 
       - name: "⚡ Cache Trivy Database"
         if: steps.variant-filter.outputs.skip != 'true'
-        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: .trivycache
           key: ${{ runner.os }}-trivy-${{ github.run_id }}
@@ -304,6 +304,16 @@ jobs:
             exit 1
           fi
 
+      - name: "🎯 Check if tag is stable release"
+        id: tag-check
+        if: steps.variant-filter.outputs.skip != 'true'
+        run: |
+          if echo "${{ github.ref }}" | grep -Eq "^refs/tags/${{ matrix.variant }}-v?[0-9]+\.[0-9]+\.[0-9]+$"; then
+            echo "is_stable=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "is_stable=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: "🏷️ Generate Docker Metadata"
         if: steps.variant-filter.outputs.skip != 'true'
         id: meta
@@ -324,20 +334,16 @@ jobs:
             type=raw,enable=${{ contains(fromJSON('["refs/heads/main", "refs/heads/master"]'), github.ref) && github.event_name != 'schedule' }},priority=200,prefix=,suffix=-${{ matrix.variant }},value=latest
             # Main/master branch - global latest tag (only for is_latest variant, no suffix)
             type=raw,enable=${{ matrix.is_latest && contains(fromJSON('["refs/heads/main", "refs/heads/master"]'), github.ref) && github.event_name != 'schedule' }},priority=200,prefix=,suffix=,value=latest
-            # Tag builds - variant-suffixed tag
-            type=raw,enable=${{ startsWith(github.ref, format('refs/tags/{0}-', matrix.variant)) }},priority=200,prefix=,suffix=-${{ matrix.variant }},value=latest
-            # Tag builds - global latest tag (only for is_latest variant, no suffix)
-            type=raw,enable=${{ matrix.is_latest && startsWith(github.ref, format('refs/tags/{0}-', matrix.variant)) }},priority=200,prefix=,suffix=,value=latest
+            # Tag builds - variant-suffixed tag (stable only)
+            type=raw,enable=${{ steps.tag-check.outputs.is_stable == 'true' }},priority=200,prefix=,suffix=-${{ matrix.variant }},value=latest
+            # Tag builds - global latest tag (only for is_latest variant, no suffix, stable only)
+            type=raw,enable=${{ matrix.is_latest && steps.tag-check.outputs.is_stable == 'true' }},priority=200,prefix=,suffix=,value=latest
             # Nightly builds - variant-suffixed
             type=schedule,enable=true,priority=1000,prefix=,suffix=-${{ matrix.variant }},pattern=nightly
             # Nightly builds - global nightly tag (only for is_latest variant, no suffix)
             type=schedule,enable=${{ matrix.is_latest }},priority=1000,prefix=,suffix=,pattern=nightly
-            # Date-based tags for traceability (YYYYMMDD) - variant-suffixed
-            type=schedule,enable=true,priority=900,prefix=,suffix=-${{ matrix.variant }},pattern={{date 'YYYYMMDD'}}
-            # Date-based tags - global tag (only for is_latest variant, no suffix)
-            type=schedule,enable=${{ matrix.is_latest }},priority=900,prefix=,suffix=,pattern={{date 'YYYYMMDD'}}
             # Semantic version tags from Release Please (variant-x.y.z) - variant-suffixed
-            type=match,enable=${{ startsWith(github.ref, format('refs/tags/{0}-', matrix.variant)) }},priority=800,prefix=,suffix=-${{ matrix.variant }},pattern=${{ matrix.variant }}-v?(\d+\.\d+\.\d+),group=1
+            type=match,enable=${{ startsWith(github.ref, format('refs/tags/{0}-', matrix.variant)) }},priority=800,prefix=,suffix=-${{ matrix.variant }},pattern=${{ matrix.variant }}-v?(.*),group=1
         env:
           DOCKER_METADATA_ANNOTATIONS_LEVELS: manifest,index
 
@@ -349,7 +355,7 @@ jobs:
           context: ${{ matrix.context }}
           build-args: |
             BUILDTIME=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.created'] }}
-            VERSION=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.version'] }}
+            VERSION=${{ matrix.version }}
             REVISION=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.revision'] }}
           platforms: ${{ matrix.platforms }}
           provenance: true
@@ -393,8 +399,11 @@ jobs:
         env:
           IMAGE_DIGEST: ${{ steps.build.outputs.digest }}
         run: |
-          # Get the first tag for inspection
-          first_tag=$(echo "${{ steps.meta.outputs.tags }}" | head -n 1)
+          # Use GHCR tag for inspection to avoid DockerHub rate limits
+          first_tag=$(echo "${{ steps.meta.outputs.tags }}" | grep '^ghcr.io/' | head -n 1)
+          if [ -z "$first_tag" ]; then
+            first_tag=$(echo "${{ steps.meta.outputs.tags }}" | head -n 1)
+          fi
 
           echo "→ Inspecting manifest for: ${first_tag}"
 
@@ -548,22 +557,6 @@ jobs:
           }
 
           # Test images from each registry
-          # DockerHub (no prefix)
-          if [ "${{ steps.login-dockerhub.outcome }}" = "success" ]; then
-            dockerhub_tag=$(echo "${TAGS}" | grep -v '/' | head -n 1)
-            if [ -n "${dockerhub_tag}" ]; then
-              echo "  Testing DockerHub: ${dockerhub_tag}"
-              if retry_pull "${dockerhub_tag}"; then
-                if run_smoke_test "${dockerhub_tag}" "DockerHub"; then
-                  size=$(docker image inspect "${dockerhub_tag}" --format='{{.Size}}' | awk '{printf "%.2f MB", $1/1024/1024}')
-                  echo "  ✓ DockerHub image verified (Size: ${size})"
-                fi
-              else
-                echo "  ✗ DockerHub image pull failed after retries"
-              fi
-            fi
-          fi
-
           # GHCR
           if [ "${{ steps.login-ghcr.outcome }}" = "success" ]; then
             ghcr_tag=$(echo "${TAGS}" | grep '^ghcr.io/' | head -n 1)
@@ -576,6 +569,22 @@ jobs:
                 fi
               else
                 echo "  ✗ GHCR image pull failed after retries"
+              fi
+            fi
+          fi
+
+          # DockerHub (no prefix)
+          if [ "${{ steps.login-dockerhub.outcome }}" = "success" ]; then
+            dockerhub_tag=$(echo "${TAGS}" | grep -v '/' | head -n 1)
+            if [ -n "${dockerhub_tag}" ]; then
+              echo "  Testing DockerHub: ${dockerhub_tag}"
+              if retry_pull "${dockerhub_tag}"; then
+                if run_smoke_test "${dockerhub_tag}" "DockerHub"; then
+                  size=$(docker image inspect "${dockerhub_tag}" --format='{{.Size}}' | awk '{printf "%.2f MB", $1/1024/1024}')
+                  echo "  ✓ DockerHub image verified (Size: ${size})"
+                fi
+              else
+                echo "  ✗ DockerHub image pull failed after retries"
               fi
             fi
           fi
@@ -598,6 +607,19 @@ jobs:
 
           echo "✓ Registry verification completed"
 
+      - name: "🏷️ Determine Image for Trivy Scan"
+        id: trivy-image
+        if: steps.variant-filter.outputs.skip != 'true' && steps.build.conclusion == 'success'
+        run: |
+          # Use GHCR tag for Trivy scan to avoid Docker Hub rate limits
+          # Fallback to the first generated tag if GHCR is not found
+          SCAN_TAG=$(echo "${{ steps.meta.outputs.tags }}" | grep '^ghcr.io/' | head -n 1)
+          if [ -z "${SCAN_TAG}" ]; then
+            SCAN_TAG="${{ fromJSON(steps.meta.outputs.json).tags[0] }}"
+          fi
+          echo "tag=${SCAN_TAG}" >> "$GITHUB_OUTPUT"
+          echo "→ Scanning image: ${SCAN_TAG}"
+
       - name: "🕵️ Scan Image for Vulnerabilities (Trivy)"
         id: trivy
         if: steps.variant-filter.outputs.skip != 'true' && steps.build.conclusion == 'success'
@@ -608,7 +630,7 @@ jobs:
           TRIVY_CHECKS_BUNDLE_REPOSITORY: "public.ecr.aws/aquasecurity/trivy-checks"
         with:
           scan-type: "image"
-          image-ref: ${{ fromJSON(steps.meta.outputs.json).tags[0] }}
+          image-ref: ${{ steps.trivy-image.outputs.tag }}
           format: "sarif"
           output: "trivy-image-${{ matrix.variant }}.sarif"
           severity: "CRITICAL,HIGH,MEDIUM,LOW"

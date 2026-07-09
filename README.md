@@ -61,7 +61,7 @@ docker run -d \
 
 **Supported Architectures**: i386, amd64, arm32v6, arm32v7, arm64, ppc64le, riscv64, s390x
 
-**Base Image**: `snowdreamtech/alpine:3.24.0`
+**Base Image**: `snowdreamtech/alpine:3.24.1`
 
 ### Rocky
 

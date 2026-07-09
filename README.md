@@ -210,7 +210,7 @@ Images follow semantic versioning with the format: `{major}.{minor}.{patch}-{var
 Examples:
 
 - `snowdreamtech/build-essential:13.5.0-debian`
-- `snowdreamtech/build-essential:3.24.0-alpine`
+- `snowdreamtech/build-essential:3.24.1-alpine`
 - `snowdreamtech/build-essential:10.2.0-rocky`
 
 This format allows:

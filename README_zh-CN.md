@@ -210,7 +210,7 @@ services:
 示例：
 
 - `snowdreamtech/build-essential:13.5.0-debian`
-- `snowdreamtech/build-essential:3.24.0-alpine`
+- `snowdreamtech/build-essential:3.24.1-alpine`
 - `snowdreamtech/build-essential:10.2.0-rocky`
 
 此格式允许：

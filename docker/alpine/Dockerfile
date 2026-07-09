@@ -19,7 +19,7 @@ ARG BUILDTIME \
     WORKDIR=/root
 
 # x-release-please-start-version
-ARG BUILD_ESSENTIAL_VERSION=3.24.0
+ARG BUILD_ESSENTIAL_VERSION=3.24.1
 # x-release-please-end
 
 # Standard OCI Metadata (https://github.com/opencontainers/image-spec)
@@ -27,7 +27,7 @@ LABEL org.opencontainers.image.authors="Snowdream Tech" \
     org.opencontainers.image.title="Build-Essential Image Based On Alpine" \
     org.opencontainers.image.description="Docker Images for Build-Essential on Alpine. (i386, amd64, arm32v6, arm32v7, arm64, ppc64le, riscv64, s390x)" \
     org.opencontainers.image.documentation="https://hub.docker.com/r/snowdreamtech/build-essential" \
-    org.opencontainers.image.base.name="snowdreamtech/alpine:3.24.0" \
+    org.opencontainers.image.base.name="snowdreamtech/alpine:3.24.1" \
     org.opencontainers.image.licenses="MIT" \
     org.opencontainers.image.source="https://github.com/snowdreamtech/build-essential" \
     org.opencontainers.image.vendor="Snowdream Tech" \
@@ -36,7 +36,7 @@ LABEL org.opencontainers.image.authors="Snowdream Tech" \
     org.opencontainers.image.url="https://github.com/snowdreamtech/build-essential"
 
 # x-release-please-start-version
-LABEL org.opencontainers.image.version="${VERSION:-3.24.0}"
+LABEL org.opencontainers.image.version="${VERSION:-3.24.1}"
 # x-release-please-end
 
 # Runtime Environment Configuration

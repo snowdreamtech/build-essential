@@ -31,13 +31,11 @@ LABEL org.opencontainers.image.authors="Snowdream Tech" \
     org.opencontainers.image.licenses="MIT" \
     org.opencontainers.image.source="https://github.com/snowdreamtech/build-essential" \
     org.opencontainers.image.vendor="Snowdream Tech" \
+    org.opencontainers.image.version="${VERSION}" \
     org.opencontainers.image.created="${BUILDTIME}" \
     org.opencontainers.image.revision="${REVISION}" \
     org.opencontainers.image.url="https://github.com/snowdreamtech/build-essential"
 
-# x-release-please-start-version
-LABEL org.opencontainers.image.version="${VERSION:-10.2.0}"
-# x-release-please-end
 
 # Runtime Environment Configuration
 ENV KEEPALIVE=${KEEPALIVE} \

@@ -209,9 +209,9 @@ services:
 
 示例：
 
-- `snowdreamtech/build-essential:13.5.0-debian`
-- `snowdreamtech/build-essential:3.24.1-alpine`
-- `snowdreamtech/build-essential:10.2.0-rocky`
+- `snowdreamtech/build-essential:<version>-debian`
+- `snowdreamtech/build-essential:<version>-alpine`
+- `snowdreamtech/build-essential:<version>-rocky`
 
 此格式允许：
 

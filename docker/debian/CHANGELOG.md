@@ -1,5 +1,19 @@
 # Changelog
 
+## [13.6.0](https://github.com/snowdreamtech/build-essential/compare/debian-v13.6.0...debian-v13.6.0) (2026-08-07)
+
+
+### 🐛 Bug Fixes
+
+* remove static version defaults from OCI image labels to use variable injection exclusively ([da5645a](https://github.com/snowdreamtech/build-essential/commit/da5645ad4d48467290235abbbd9f31ba70bf690f))
+
+
+### ♻️ Miscellaneous Chores
+
+* merge upstream changes, keeping project-specific configurations ([e15cffd](https://github.com/snowdreamtech/build-essential/commit/e15cffd2b7d49474de047f526800887691356277))
+* release main ([5a92edb](https://github.com/snowdreamtech/build-essential/commit/5a92edb4ba76b04ee6de7369e9471f785849a7ae))
+* update debian base image to 13.6.0 ([5f885d5](https://github.com/snowdreamtech/build-essential/commit/5f885d5a771f06d449533f2f3c619d27444822f5))
+
 ## [13.5.0](https://github.com/snowdreamtech/build-essential/compare/debian-v13.5.0...debian-v13.5.0) (2026-07-09)
 
 
@@ -20,4 +34,3 @@
 * **release:** deduplicate CHANGELOG headers ([3068d88](https://github.com/snowdreamtech/build-essential/commit/3068d883bc6167773d046d3b2b0e4c479e4fee39))
 * **release:** deduplicate CHANGELOG headers ([82be3d5](https://github.com/snowdreamtech/build-essential/commit/82be3d5576b65b7f69b1a9afb8604f2c8f0e47f7))
 * **speckit:** manual auto-commit trigger ([5f8a5a9](https://github.com/snowdreamtech/build-essential/commit/5f8a5a9cba5d6bd42a65eaabfecd6e18b01aeeb0))
-

@@ -1,5 +1,19 @@
 # Changelog
 
+## [10.2.0](https://github.com/snowdreamtech/build-essential/compare/rocky-v10.2.0...rocky-v10.2.0) (2026-08-07)
+
+
+### 🐛 Bug Fixes
+
+* remove static version defaults from OCI image labels to use variable injection exclusively ([da5645a](https://github.com/snowdreamtech/build-essential/commit/da5645ad4d48467290235abbbd9f31ba70bf690f))
+
+
+### ♻️ Miscellaneous Chores
+
+* merge upstream changes, keeping project-specific configurations ([e15cffd](https://github.com/snowdreamtech/build-essential/commit/e15cffd2b7d49474de047f526800887691356277))
+* release main ([5a92edb](https://github.com/snowdreamtech/build-essential/commit/5a92edb4ba76b04ee6de7369e9471f785849a7ae))
+* **release:** deduplicate CHANGELOG headers ([c2bba24](https://github.com/snowdreamtech/build-essential/commit/c2bba247dca89a31accc6e70c5e48b16170b1ce5))
+
 ## [10.2.0](https://github.com/snowdreamtech/build-essential/compare/rocky-v10.2.0...rocky-v10.2.0) (2026-07-09)
 
 
@@ -20,4 +34,3 @@
 * **release:** deduplicate CHANGELOG headers ([3068d88](https://github.com/snowdreamtech/build-essential/commit/3068d883bc6167773d046d3b2b0e4c479e4fee39))
 * **release:** deduplicate CHANGELOG headers ([82be3d5](https://github.com/snowdreamtech/build-essential/commit/82be3d5576b65b7f69b1a9afb8604f2c8f0e47f7))
 * **speckit:** manual auto-commit trigger ([5f8a5a9](https://github.com/snowdreamtech/build-essential/commit/5f8a5a9cba5d6bd42a65eaabfecd6e18b01aeeb0))
-

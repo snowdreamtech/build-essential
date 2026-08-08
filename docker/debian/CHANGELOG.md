@@ -1,5 +1,14 @@
 # Changelog
 
+## [13.6.0](https://github.com/snowdreamtech/build-essential/compare/debian-v13.6.0...debian-v13.6.0) (2026-08-08)
+
+
+### ♻️ Miscellaneous Chores
+
+* release main ([c9db13e](https://github.com/snowdreamtech/build-essential/commit/c9db13ecc5033081c703e996d33c7503860ec15e))
+* **release:** deduplicate CHANGELOG headers ([a186680](https://github.com/snowdreamtech/build-essential/commit/a186680625ac23b3ebbdf41e75a7370f38e03d22))
+* sync debian build matrix and documentation with upstream ([0d6e613](https://github.com/snowdreamtech/build-essential/commit/0d6e6132c84a368f5b64b9144d9c7d3b7292d746))
+
 ## [13.6.0](https://github.com/snowdreamtech/build-essential/compare/debian-v13.6.0...debian-v13.6.0) (2026-08-07)
 
 

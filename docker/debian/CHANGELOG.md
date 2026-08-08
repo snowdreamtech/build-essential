@@ -9,20 +9,6 @@
 * **release:** deduplicate CHANGELOG headers ([a186680](https://github.com/snowdreamtech/build-essential/commit/a186680625ac23b3ebbdf41e75a7370f38e03d22))
 * sync debian build matrix and documentation with upstream ([0d6e613](https://github.com/snowdreamtech/build-essential/commit/0d6e6132c84a368f5b64b9144d9c7d3b7292d746))
 
-## [13.6.0](https://github.com/snowdreamtech/build-essential/compare/debian-v13.6.0...debian-v13.6.0) (2026-08-07)
-
-
-### 🐛 Bug Fixes
-
-* remove static version defaults from OCI image labels to use variable injection exclusively ([da5645a](https://github.com/snowdreamtech/build-essential/commit/da5645ad4d48467290235abbbd9f31ba70bf690f))
-
-
-### ♻️ Miscellaneous Chores
-
-* merge upstream changes, keeping project-specific configurations ([e15cffd](https://github.com/snowdreamtech/build-essential/commit/e15cffd2b7d49474de047f526800887691356277))
-* release main ([5a92edb](https://github.com/snowdreamtech/build-essential/commit/5a92edb4ba76b04ee6de7369e9471f785849a7ae))
-* update debian base image to 13.6.0 ([5f885d5](https://github.com/snowdreamtech/build-essential/commit/5f885d5a771f06d449533f2f3c619d27444822f5))
-
 ## [13.5.0](https://github.com/snowdreamtech/build-essential/compare/debian-v13.5.0...debian-v13.5.0) (2026-07-09)
 
 

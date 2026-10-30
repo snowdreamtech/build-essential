@@ -32,7 +32,10 @@
       "release-as": "10.2.0",
       "changelog-path": "CHANGELOG.md",
       "exclude-paths": ["docker/rocky/CHANGELOG.md"],
-      "extra-files": ["docker/rocky/Dockerfile", ".github/workflows/docker.yml"]
+      "extra-files": [
+        "docker/rocky/Dockerfile",
+        ".github/workflows/docker.yml"
+      ]
     }
   },
   "include-v-in-tag": true,

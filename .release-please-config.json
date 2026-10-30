@@ -5,7 +5,7 @@
       "release-type": "simple",
       "component": "alpine",
       "include-component-in-tag": true,
-      "release-as": "3.24.1",
+      "release-as": "3.24.3",
       "changelog-path": "CHANGELOG.md",
       "exclude-paths": ["docker/alpine/CHANGELOG.md"],
       "extra-files": [
@@ -17,7 +17,7 @@
       "release-type": "simple",
       "component": "debian",
       "include-component-in-tag": true,
-      "release-as": "13.6.0",
+      "release-as": "13.7.0",
       "changelog-path": "CHANGELOG.md",
       "exclude-paths": ["docker/debian/CHANGELOG.md"],
       "extra-files": [

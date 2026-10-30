@@ -45,7 +45,7 @@ docker run -d \
 
 **Supported Architectures**: amd64, arm32v7, arm64, ppc64le, riscv64, s390x
 
-**Base Image**: `snowdreamtech/debian:13.6.0`
+**Base Image**: `snowdreamtech/debian:13.7.0`
 
 ### Alpine
 
@@ -61,7 +61,7 @@ docker run -d \
 
 **Supported Architectures**: i386, amd64, arm32v6, arm32v7, arm64, ppc64le, riscv64, s390x
 
-**Base Image**: `snowdreamtech/alpine:3.24.1`
+**Base Image**: `snowdreamtech/alpine:3.24.3`
 
 ### Rocky
 
@@ -215,7 +215,7 @@ Examples:
 
 This format allows:
 
-- **Full version pinning**: `13.6.0-debian` (exact version)
+- **Full version pinning**: `13.7.0-debian` (exact version)
 - **Variant latest tag**: `latest-debian` (tracks most recent release for Debian)
 - **Global latest tag**: `latest` (tracks most recent release, defaults to Debian)
 

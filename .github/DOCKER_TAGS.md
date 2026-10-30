@@ -134,13 +134,13 @@ snowdreamtech/base:20260427-rocky
 
 Tags are generated with the following priority (higher number = higher priority):
 
-| Priority | Type | Example Tags | Trigger |
-|----------|------|--------------|---------|
-| 1000 | Nightly | `nightly`, `nightly-alpine` | Schedule |
-| 900 | Date | `20260427`, `20260427-alpine` | Schedule |
-| 800 | Version | `3.23.4-alpine`, `13.4.0` | Tag push |
-| 600 | Branch | `dev-alpine`, `main-debian` | Branch push |
-| 200 | Latest | `latest`, `latest-alpine` | Main/Tag |
+| Priority | Type    | Example Tags                  | Trigger     |
+| -------- | ------- | ----------------------------- | ----------- |
+| 1000     | Nightly | `nightly`, `nightly-alpine`   | Schedule    |
+| 900      | Date    | `20260427`, `20260427-alpine` | Schedule    |
+| 800      | Version | `3.23.4-alpine`, `13.4.0`     | Tag push    |
+| 600      | Branch  | `dev-alpine`, `main-debian`   | Branch push |
+| 200      | Latest  | `latest`, `latest-alpine`     | Main/Tag    |
 
 ---
 
@@ -255,7 +255,7 @@ matrix:
 
     - variant: debian
       version: "13.4.0"
-      is_latest: true    # ← Default variant
+      is_latest: true # ← Default variant
 
     - variant: rocky
       version: "10.1.0"

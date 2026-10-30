@@ -1,14 +1,11 @@
-# Base Image (Debian Variant)
+# Build-Essential Image (Debian Variant)
 # Extends snowdreamtech/debian with additional tooling and configuration.
 
 FROM ghcr.io/snowdreamtech/debian:13.6.0
 
 # Build-time Configuration
-# x-release-please-start-version
-ARG VERSION="13.6.0"
-# x-release-please-end
-
 ARG BUILDTIME \
+    VERSION \
     REVISION \
     DEBIAN_FRONTEND=noninteractive \
     KEEPALIVE=0 \
@@ -22,19 +19,24 @@ ARG BUILDTIME \
     USER=root \
     WORKDIR=/root
 
+# x-release-please-start-version
+ARG BUILD_ESSENTIAL_VERSION=13.6.0
+# x-release-please-end
+
 # Standard OCI Metadata (https://github.com/opencontainers/image-spec)
 LABEL org.opencontainers.image.authors="Snowdream Tech" \
-    org.opencontainers.image.title="Base Image Based On Debian" \
-    org.opencontainers.image.description="Docker Images for Base on Debian. (amd64, arm32v7, arm64, ppc64le, riscv64, s390x)" \
-    org.opencontainers.image.documentation="https://hub.docker.com/r/snowdreamtech/base" \
-    org.opencontainers.image.base.name="snowdreamtech/base:debian" \
+    org.opencontainers.image.title="Build-Essential Image Based On Debian" \
+    org.opencontainers.image.description="Docker Images for Build-Essential on Debian. (i386, amd64, arm32v5, arm32v7, arm64, mips64le, ppc64le, s390x)" \
+    org.opencontainers.image.documentation="https://hub.docker.com/r/snowdreamtech/build-essential" \
+    org.opencontainers.image.base.name="snowdreamtech/debian:13.6.0" \
     org.opencontainers.image.licenses="MIT" \
-    org.opencontainers.image.source="https://github.com/snowdreamtech/base" \
+    org.opencontainers.image.source="https://github.com/snowdreamtech/build-essential" \
     org.opencontainers.image.vendor="Snowdream Tech" \
     org.opencontainers.image.version="${VERSION}" \
     org.opencontainers.image.created="${BUILDTIME}" \
     org.opencontainers.image.revision="${REVISION}" \
-    org.opencontainers.image.url="https://github.com/snowdreamtech/base"
+    org.opencontainers.image.url="https://github.com/snowdreamtech/build-essential"
+
 
 # Runtime Environment Configuration
 ENV DEBIAN_FRONTEND=${DEBIAN_FRONTEND} \
@@ -47,13 +49,69 @@ ENV DEBIAN_FRONTEND=${DEBIAN_FRONTEND} \
     PGID=${PGID} \
     PUID=${PUID} \
     USER=${USER} \
-    WORKDIR=${WORKDIR}
+    WORKDIR=${WORKDIR} \
+    BUILD_ESSENTIAL_VERSION=${BUILD_ESSENTIAL_VERSION}
 
-# Additional tooling and configuration for Base image
+# Additional tooling and configuration for Build-Essential image
 RUN set -eux \
     && DEBIAN_FRONTEND=noninteractive apt-get -qqy update \
     && DEBIAN_FRONTEND=noninteractive apt-get -qqy install --no-install-recommends \
+    build-essential \
+    cmake \
+    ninja-build \
+    pkg-config \
+    git \
+    curl \
+    wget \
+    unzip \
+    tar \
+    xz-utils \
     vim \
+    meson \
+    zip \
+    bzip2 \
+    gzip \
+    zstd \
+    gnupg \
+    ca-certificates \
+    file \
+    tree \
+    jq \
+    libssl-dev \
+    zlib1g-dev \
+    autoconf \
+    automake \
+    libtool \
+    m4 \
+    patch \
+    flex \
+    bison \
+    ccache \
+    gettext \
+    perl \
+    python3 \
+    rsync \
+    bash \
+    gawk \
+    bc \
+    dos2unix \
+    libncurses-dev \
+    libreadline-dev \
+    libffi-dev \
+    libsqlite3-dev \
+    gfortran \
+    sudo \
+    fakeroot \
+    texinfo \
+    libexpat1-dev \
+    swig \
+    gperf \
+    libbz2-dev \
+    liblzma-dev \
+    libzstd-dev \
+    && for pkg in gdb strace valgrind ltrace libelf-dev nasm yasm; do \
+        DEBIAN_FRONTEND=noninteractive apt-get -qqy install --no-install-recommends $pkg || echo "Package $pkg not available on this architecture, skipping."; \
+    done \
     && DEBIAN_FRONTEND=noninteractive apt-get -qqy --purge autoremove \
     && DEBIAN_FRONTEND=noninteractive apt-get -qqy clean \
     && rm -rf /var/lib/apt/lists/* \

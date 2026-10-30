@@ -1,37 +1,28 @@
 # Changelog
 
-## [13.6.0](https://github.com/snowdreamtech/base/compare/debian-v13.6.0...debian-v13.6.0) (2026-10-28)
-
-
-### 🚀 Features
-
-* initial release of snowdreamtech base docker images powered by unirtm ([25f55c8](https://github.com/snowdreamtech/base/commit/25f55c84e8fba977d226739e9871d61e1428fdeb))
-
-## [13.5.0](https://github.com/snowdreamtech/base/compare/debian-v13.5.0...debian-v13.5.0) (2026-07-03)
-
+## [13.6.0](https://github.com/snowdreamtech/build-essential/compare/debian-v13.6.0...debian-v13.6.0) (2026-08-08)
 
 ### ♻️ Miscellaneous Chores
 
-* add 0-git-keep.sh to prevent empty entrypoint.d directories ([ce77247](https://github.com/snowdreamtech/base/commit/ce77247762becc1edf85ec7b57747d3f3127044a))
+- release main ([c9db13e](https://github.com/snowdreamtech/build-essential/commit/c9db13ecc5033081c703e996d33c7503860ec15e))
+- **release:** deduplicate CHANGELOG headers ([a186680](https://github.com/snowdreamtech/build-essential/commit/a186680625ac23b3ebbdf41e75a7370f38e03d22))
+- sync debian build matrix and documentation with upstream ([0d6e613](https://github.com/snowdreamtech/build-essential/commit/0d6e6132c84a368f5b64b9144d9c7d3b7292d746))
 
-## [13.4.0](https://github.com/snowdreamtech/base/compare/debian-v13.4.0...debian-v13.4.0) (2026-04-29)
+## [13.5.0](https://github.com/snowdreamtech/build-essential/compare/debian-v13.5.0...debian-v13.5.0) (2026-07-09)
 
+### 🐛 Bug Fixes
 
-### 🛠 Refactoring
-
-* **docker:** align Dockerfiles with base image structure ([232574f](https://github.com/snowdreamtech/base/commit/232574fed8418f8c7f257d001e951361dfa467a0))
-* remove redundant docker-entrypoint.sh files ([87c576b](https://github.com/snowdreamtech/base/commit/87c576b27731ad11c5bc0ebc661e07c5a09ff1c1))
-* reorganize distribution variants into docker directory ([67a8c91](https://github.com/snowdreamtech/base/commit/67a8c911e21801bf12b3e83d02e22f3b3f59a2ba))
-
-
-### 📖 Documentation
-
-* add detailed comments to entrypoint initialization scripts ([f42cbaa](https://github.com/snowdreamtech/base/commit/f42cbaab6edfbc5c38c2a636dfd8651fea900940))
-
+- use ghcr.io for base images to avoid rate limits ([9f1d73a](https://github.com/snowdreamtech/build-essential/commit/9f1d73a75a61f2f368f5572c4bd28f4c92ef8fd5))
 
 ### ♻️ Miscellaneous Chores
 
-* **main:** release 0.14.0 ([043d2a4](https://github.com/snowdreamtech/base/commit/043d2a4202505e42c645e899c6731f5fb8f52c8e))
-* release 0.6.1 ([f6fc042](https://github.com/snowdreamtech/base/commit/f6fc042cad7d1c4991a20657655bc4b6b339d0d9))
-* release 0.7.1 ([5535492](https://github.com/snowdreamtech/base/commit/5535492160f3525dff06ff9f0c6d78147467bed3))
-* **release:** v0.4.0 - Fix Dependabot docker-compose detection ([e91f7d8](https://github.com/snowdreamtech/base/commit/e91f7d882f3c7b23260f4da02f0e5e53d6399968))
+- add 0-git-keep.sh to prevent empty entrypoint.d directories ([ce77247](https://github.com/snowdreamtech/build-essential/commit/ce77247762becc1edf85ec7b57747d3f3127044a))
+- merge upstream branch and resolve conflicts ([0ab3ed6](https://github.com/snowdreamtech/build-essential/commit/0ab3ed6c927860dd82d5587f19181c76c1b332b0))
+- release main ([4011a21](https://github.com/snowdreamtech/build-essential/commit/4011a21a23395acc9545168c95ca0ec5c867e7d3))
+- release main ([d52be5c](https://github.com/snowdreamtech/build-essential/commit/d52be5cf0c5cff45f7f72e973d62c94b48855e1b))
+- release main ([f66597a](https://github.com/snowdreamtech/build-essential/commit/f66597a5feae95e8853f4cc730c81e93e172f6ca))
+- release main ([b3a5cc9](https://github.com/snowdreamtech/build-essential/commit/b3a5cc9ef0a64a7bc04ed7c2acf0cca5327c5c26))
+- **release:** deduplicate CHANGELOG headers ([4f07b71](https://github.com/snowdreamtech/build-essential/commit/4f07b71194f58ba214f1fb60ce0dc56d71c499e2))
+- **release:** deduplicate CHANGELOG headers ([3068d88](https://github.com/snowdreamtech/build-essential/commit/3068d883bc6167773d046d3b2b0e4c479e4fee39))
+- **release:** deduplicate CHANGELOG headers ([82be3d5](https://github.com/snowdreamtech/build-essential/commit/82be3d5576b65b7f69b1a9afb8604f2c8f0e47f7))
+- **speckit:** manual auto-commit trigger ([5f8a5a9](https://github.com/snowdreamtech/build-essential/commit/5f8a5a9cba5d6bd42a65eaabfecd6e18b01aeeb0))

@@ -1,22 +1,15 @@
-# Base
+# Build-Essential
 
-[![CI Pipeline](https://img.shields.io/github/actions/workflow/status/snowdreamtech/base/ci.yml?branch=main&label=CI%20Pipeline)](https://github.com/snowdreamtech/base/actions/workflows/ci.yml)
-[![CD Pipeline](https://img.shields.io/github/actions/workflow/status/snowdreamtech/base/cd.yml?branch=main&label=CD%20Pipeline)](https://github.com/snowdreamtech/base/actions/workflows/cd.yml)
-[![CodeQL](https://img.shields.io/github/actions/workflow/status/snowdreamtech/base/codeql.yml?branch=main&label=CodeQL&logo=github)](https://github.com/snowdreamtech/base/actions/workflows/codeql.yml)
-[![Security Audit](https://img.shields.io/badge/Security-Zizmor%20%7C%20Trivy%20%7C%20Gitleaks-brightgreen)](https://github.com/snowdreamtech/base/actions/workflows/ci.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/license/MIT)
-![Docker Image Version](https://img.shields.io/docker/v/snowdreamtech/base)
-![Docker Image Size](https://img.shields.io/docker/image-size/snowdreamtech/base/latest)
-![Docker Pulls](https://img.shields.io/docker/pulls/snowdreamtech/base)
-![Docker Stars](https://img.shields.io/docker/stars/snowdreamtech/base)
+![Docker Image Version](https://img.shields.io/docker/v/snowdreamtech/build-essential)
+![Docker Image Size](https://img.shields.io/docker/image-size/snowdreamtech/build-essential/latest)
+![Docker Pulls](https://img.shields.io/docker/pulls/snowdreamtech/build-essential)
+![Docker Stars](https://img.shields.io/docker/stars/snowdreamtech/build-essential)
 
-[English](README.md) | [简体中文](README_zh-CN.md)
-
-Docker base template providing standardized container foundations with flexible entrypoint systems, multi-architecture support, and consistent configuration patterns across Alpine, Debian, and Rocky Linux distributions.
+Docker build-essential template providing standardized container foundations with flexible entrypoint systems, multi-architecture support, and consistent configuration patterns across Alpine, Debian, and Rocky Linux distributions.
 
 ## Overview
 
-The Docker base template serves as a foundational starting point for building containerized applications. It provides:
+The Docker build-essential template serves as a foundational starting point for building containerized applications. It provides:
 
 - **Standardized Dockerfiles** with OCI annotations and best practices
 - **Flexible entrypoint system** supporting custom initialization scripts
@@ -29,11 +22,11 @@ The Docker base template serves as a foundational starting point for building co
 
 ```bash
 # Pull and run the default Debian variant
-docker pull snowdreamtech/base:debian
-docker run -d --name=base -e TZ=Asia/Shanghai snowdreamtech/base:debian
+docker pull snowdreamtech/build-essential:debian
+docker run -d --name=build-essential -e TZ=Asia/Shanghai snowdreamtech/build-essential:debian
 
-# Or use docker compose
-docker compose up -d
+# Or use docker-compose
+docker-compose up -d
 ```
 
 ## Distribution Variants
@@ -44,15 +37,15 @@ The recommended variant for most use cases, providing wide compatibility and ext
 
 ```bash
 docker run -d \
-  --name=base \
+  --name=build-essential \
   -e TZ=Asia/Shanghai \
   --restart unless-stopped \
-  snowdreamtech/base:debian
+  snowdreamtech/build-essential:debian
 ```
 
 **Supported Architectures**: amd64, arm32v7, arm64, ppc64le, riscv64, s390x
 
-**Base Image**: `snowdreamtech/debian:latest`
+**Base Image**: `snowdreamtech/debian:13.6.0`
 
 ### Alpine
 
@@ -60,31 +53,31 @@ Lightweight variant optimized for minimal image size and fast startup times.
 
 ```bash
 docker run -d \
-  --name=base \
+  --name=build-essential \
   -e TZ=Asia/Shanghai \
   --restart unless-stopped \
-  snowdreamtech/base:alpine
+  snowdreamtech/build-essential:alpine
 ```
 
 **Supported Architectures**: i386, amd64, arm32v6, arm32v7, arm64, ppc64le, riscv64, s390x
 
-**Base Image**: `snowdreamtech/alpine:latest`
+**Base Image**: `snowdreamtech/alpine:3.24.1`
 
 ### Rocky
 
-Enterprise-focused variant based on Rocky Linux, ideal for production environments requiring RHEL compatibility.
+Enterprise-focused variant build-essentiald on Rocky Linux, ideal for production environments requiring RHEL compatibility.
 
 ```bash
 docker run -d \
-  --name=base \
+  --name=build-essential \
   -e TZ=Asia/Shanghai \
   --restart unless-stopped \
-  snowdreamtech/base:rocky
+  snowdreamtech/build-essential:rocky
 ```
 
-**Supported Architectures**: i386, amd64, arm32v5, arm32v7, arm64, ppc64le, riscv64, s390x
+**Supported Architectures**: amd64, arm64, ppc64le, s390x
 
-**Base Image**: `snowdreamtech/rocky:latest`
+**Base Image**: `snowdreamtech/rocky:10.2.0`
 
 ## Build Instructions
 
@@ -92,13 +85,13 @@ docker run -d \
 
 ```bash
 # Build Debian variant
-docker build -t snowdreamtech/base:debian ./docker/debian/
+docker build -t snowdreamtech/build-essential:debian ./docker/debian/
 
 # Build Alpine variant
-docker build -t snowdreamtech/base:alpine ./docker/alpine/
+docker build -t snowdreamtech/build-essential:alpine ./docker/alpine/
 
 # Build Rocky variant
-docker build -t snowdreamtech/base:rocky ./docker/rocky/
+docker build -t snowdreamtech/build-essential:rocky ./docker/rocky/
 ```
 
 ### Multi-Architecture Build
@@ -111,22 +104,22 @@ docker buildx create --use --name build --node build --driver-opt network=host
 
 # Build Debian for multiple architectures
 docker buildx build \
-  --platform=linux/386,linux/amd64,linux/arm/v5,linux/arm/v7,linux/arm64,linux/ppc64le,linux/riscv64,linux/s390x \
-  -t snowdreamtech/base:debian \
+  --platform=linux/386,linux/amd64,linux/arm/v5,linux/arm/v7,linux/arm64,linux/mips64le,linux/ppc64le,linux/s390x \
+  -t snowdreamtech/build-essential:debian \
   ./docker/debian/ \
   --push
 
 # Build Alpine for multiple architectures
 docker buildx build \
   --platform=linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64,linux/ppc64le,linux/riscv64,linux/s390x \
-  -t snowdreamtech/base:alpine \
+  -t snowdreamtech/build-essential:alpine \
   ./docker/alpine/ \
   --push
 
 # Build Rocky for multiple architectures
 docker buildx build \
-  --platform=linux/amd64,linux/arm64,linux/ppc64le,linux/s390x \
-  -t snowdreamtech/base:rocky \
+  --platform=linux/386,linux/amd64,linux/arm/v5,linux/arm/v7,linux/arm64,linux/mips64le,linux/ppc64le,linux/s390x \
+  -t snowdreamtech/build-essential:rocky \
   ./docker/rocky/ \
   --push
 ```
@@ -135,19 +128,18 @@ docker buildx build \
 
 All variants support the following environment variables for runtime configuration:
 
-| Variable               | Default   | Description                                              |
-| ---------------------- | --------- | -------------------------------------------------------- |
-| `KEEPALIVE`            | `0`       | Keep container running (1=enabled, 0=disabled)           |
-| `CAP_NET_BIND_SERVICE` | `0`       | Enable binding to privileged ports (<1024)               |
-| `LANG`                 | `C.UTF-8` | Locale setting for UTF-8 character support               |
-| `UMASK`                | `022`     | Default file creation mask                               |
-| `DEBUG`                | `false`   | Enable debug output in entrypoint scripts                |
-| `PASSWORDLESS_SUDO`    | `false`   | Enable passwordless sudo for non-root users (true/false) |
-| `PGID`                 | `0`       | Primary group ID for custom user creation                |
-| `PUID`                 | `0`       | User ID for custom user creation                         |
-| `USER`                 | `root`    | Username for custom user creation                        |
-| `WORKDIR`              | `/root`   | Working directory path                                   |
-| `TZ`                   | -         | Timezone (e.g., `Asia/Shanghai`, `America/New_York`)     |
+| Variable               | Default   | Description                                          |
+| ---------------------- | --------- | ---------------------------------------------------- |
+| `KEEPALIVE`            | `0`       | Keep container running (1=enabled, 0=disabled)       |
+| `CAP_NET_BIND_SERVICE` | `0`       | Enable binding to privileged ports (<1024)           |
+| `LANG`                 | `C.UTF-8` | Locale setting for UTF-8 character support           |
+| `UMASK`                | `022`     | Default file creation mask                           |
+| `DEBUG`                | `false`   | Enable debug output in entrypoint scripts            |
+| `PGID`                 | `0`       | Primary group ID for custom user creation            |
+| `PUID`                 | `0`       | User ID for custom user creation                     |
+| `USER`                 | `root`    | Username for custom user creation                    |
+| `WORKDIR`              | `/root`   | Working directory path                               |
+| `TZ`                   | -         | Timezone (e.g., `Asia/Shanghai`, `America/New_York`) |
 
 **Debian-specific**:
 
@@ -164,7 +156,7 @@ docker build \
   --build-arg PUID=1000 \
   --build-arg PGID=1000 \
   --build-arg USER=appuser \
-  -t snowdreamtech/base:debian-custom \
+  -t snowdreamtech/build-essential:debian-custom \
   ./docker/debian/
 ```
 
@@ -172,11 +164,11 @@ Or at runtime (requires rebuilding the image):
 
 ```bash
 docker run -d \
-  --name=base \
+  --name=build-essential \
   -e PUID=1000 \
   -e PGID=1000 \
   -e USER=appuser \
-  snowdreamtech/base:debian
+  snowdreamtech/build-essential:debian
 ```
 
 **Note**: User creation only occurs when `PUID≠0`, `PGID≠0`, and `USER≠root`.
@@ -187,9 +179,9 @@ docker run -d \
 
 ```yaml
 services:
-  base:
-    image: snowdreamtech/base:debian
-    container_name: base
+  build-essential:
+    image: snowdreamtech/build-essential:debian
+    container_name: build-essential
     environment:
       - TZ=Asia/Shanghai
     restart: unless-stopped
@@ -199,9 +191,9 @@ services:
 
 ```yaml
 services:
-  base:
-    image: snowdreamtech/base:debian
-    container_name: base
+  build-essential:
+    image: snowdreamtech/build-essential:debian
+    container_name: build-essential
     environment:
       - TZ=Asia/Shanghai
       - DEBUG=true
@@ -217,13 +209,13 @@ Images follow semantic versioning with the format: `{major}.{minor}.{patch}-{var
 
 Examples:
 
-- `snowdreamtech/base:<version>-debian`
-- `snowdreamtech/base:<version>-alpine`
-- `snowdreamtech/base:<version>-rocky`
+- `snowdreamtech/build-essential:<version>-debian`
+- `snowdreamtech/build-essential:<version>-alpine`
+- `snowdreamtech/build-essential:<version>-rocky`
 
 This format allows:
 
-- **Full version pinning**: `<version>-debian` (exact version)
+- **Full version pinning**: `13.6.0-debian` (exact version)
 - **Variant latest tag**: `latest-debian` (tracks most recent release for Debian)
 - **Global latest tag**: `latest` (tracks most recent release, defaults to Debian)
 
@@ -241,7 +233,7 @@ Docker automatically selects the appropriate architecture for your platform when
 
 ## Entrypoint System
 
-The base template includes a flexible entrypoint system that executes custom initialization scripts before starting your application.
+The build-essential template includes a flexible entrypoint system that executes custom initialization scripts before starting your application.
 
 ### How It Works
 
@@ -255,7 +247,7 @@ The base template includes a flexible entrypoint system that executes custom ini
 Create custom initialization scripts in your derived Dockerfile:
 
 ```dockerfile
-FROM snowdreamtech/base:debian
+FROM snowdreamtech/build-essential:debian
 
 # Add your custom initialization script
 COPY my-init.sh /usr/local/bin/entrypoint.d/20-my-init.sh
@@ -271,14 +263,14 @@ CMD ["/app/start.sh"]
 Enable debug output to troubleshoot entrypoint execution:
 
 ```bash
-docker run -e DEBUG=true snowdreamtech/base:debian
+docker run -e DEBUG=true snowdreamtech/build-essential:debian
 ```
 
 Output example:
 
 ```
 → [ENTRYPOINT] Executing all scripts in /usr/local/bin/entrypoint.d
-→ Running /usr/local/bin/entrypoint.d/10-base-init.sh
+→ Running /usr/local/bin/entrypoint.d/10-build-essential-init.sh
 → [ENTRYPOINT] Done.
 ```
 
@@ -286,47 +278,34 @@ Output example:
 
 ### Prerequisites
 
-- Docker (>= 20.10) with Docker Buildx plugin
-- [UniRTM](https://github.com/snowdreamtech/UniRTM) for workspace quality guard and toolchain management
-
-### Quality & Verification
-
-```bash
-# Setup toolchain and verify environment
-unirtm run setup
-
-# Run comprehensive workspace quality check (formatters, linters, security)
-unirtm run verify
-
-# Run security audits (Zizmor, Gitleaks, OSV-Scanner, Trivy)
-unirtm run audit
-
-# Automatically fix linting and formatting issues where supported
-unirtm run fix
-```
+- Docker (>= 20.10)
+- Docker Buildx plugin
 
 ### Building Locally
 
 ```bash
+# Build all variants
+make build
+
 # Build specific variant
-docker build -t base:debian ./docker/debian/
-docker build -t base:alpine ./docker/alpine/
-docker build -t base:rocky ./docker/rocky/
+docker build -t build-essential:debian ./docker/debian/
+docker build -t build-essential:alpine ./docker/alpine/
+docker build -t build-essential:rocky ./docker/rocky/
 ```
 
 ### Testing
 
 ```bash
 # Test default configuration
-docker run --rm base:debian id
+docker run --rm build-essential:debian id
 
 # Test custom user creation
-docker build --build-arg PUID=1000 --build-arg PGID=1000 --build-arg USER=testuser -t base:debian-test ./docker/debian/
-docker run --rm base:debian-test id
+docker build --build-arg PUID=1000 --build-arg PGID=1000 --build-arg USER=testuser -t build-essential:debian-test ./docker/debian/
+docker run --rm build-essential:debian-test id
 # Expected: uid=1000(testuser) gid=1000(testuser)
 
 # Test DEBUG mode
-docker run --rm -e DEBUG=true base:debian
+docker run --rm -e DEBUG=true build-essential:debian
 ```
 
 ## Reference
@@ -338,7 +317,7 @@ docker run --rm -e DEBUG=true base:debian
 5. [Faster Multi-Platform Builds: Dockerfile Cross-Compilation Guide](https://www.docker.com/blog/faster-multi-platform-builds-dockerfile-cross-compilation-guide/)
 6. [docker/buildx](https://github.com/docker/buildx)
 
-## Contact (备注：base)
+## Contact (备注：build-essential)
 
 - Email: <sn0wdr1am@qq.com>
 - QQ: 3217680847
